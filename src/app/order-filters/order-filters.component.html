@@ -1,0 +1,124 @@
+<h2 mat-dialog-title>Work orders filters</h2>
+<mat-dialog-content class="mat-typography">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-label>Orders date range:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="from">
+            <input matEndDate placeholder="to">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td>
+        Order line:
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select line</mat-label>
+          <mat-select [value]="currentLine" (valueChange)="onLineChanged($event)">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let line of lines" [value]="line.uuid">{{line.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label>Order area:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select area</mat-label>
+          <mat-select [value]="currentArea" (valueChange)="onAreaChanged($event)">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let area of areas" [value]="area.uuid">{{area.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Order department:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select department</mat-label>
+          <mat-select [value]="currentDept" (valueChange)="onDeptChanged($event)">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let dept of depts" [value]="dept.uuid">{{dept.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label>Order equipment:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select equipment</mat-label>
+          <mat-select [value]="currentMachine">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let machine of machines" [value]="machine.uuid">{{machine.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Order description:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Type description" [(ngModel)]="description" />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label>Order number:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Type order number" [(ngModel)]="orderNumber">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label>Order status:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select status</mat-label>
+          <mat-select [value]="currentStatus">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label>Assigned to:</mat-label>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Select assignee</mat-label>
+          <mat-select [value]="currentAssignee">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let user of users" [value]="user.uuid">{{user.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="mat-dialog-actions">
+  <button class="mat-raised-button" mat-button mat-dialog-close>Clear</button>
+  <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial>Search</button>
+</mat-dialog-actions>
