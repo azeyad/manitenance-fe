@@ -1,5 +1,10 @@
-<h2 mat-dialog-title>Work orders filters</h2>
-<mat-dialog-content class="mat-typography">
+
+<mat-expansion-panel [expanded]="true" hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h4>Search work orders</h4>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
   <table class="example-full-width" cellspacing="0">
     <tr>
       <td>
@@ -117,8 +122,8 @@
       </td>
     </tr>
   </table>
-</mat-dialog-content>
-<mat-dialog-actions align="end" class="mat-dialog-actions">
-  <button class="mat-raised-button" mat-button mat-dialog-close>Clear</button>
-  <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial>Search</button>
-</mat-dialog-actions>
+  <mat-action-row>
+    <button class="mat-raised-button" mat-button mat-dialog-close>Clear</button>
+    <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial>Search</button>
+  </mat-action-row>
+</mat-expansion-panel>

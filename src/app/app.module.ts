@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
 import { NewOrderComponent } from './new-order/new-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
@@ -21,11 +20,12 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTableModule } from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
     LoginComponent,
     NewOrderComponent,
     EditOrderComponent,
@@ -47,7 +47,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     MatDialogModule,
     MatButtonModule,
-    FlexLayoutModule
+    MatTableModule,
+    FlexLayoutModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
