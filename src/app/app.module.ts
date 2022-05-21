@@ -26,6 +26,8 @@ import { OrdersSearchComponent } from './orders-search/orders-search.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatDividerModule} from '@angular/material/divider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -97,6 +97,7 @@ export class OrderFiltersComponent implements OnInit {
   public onLineChanged(lineUuid: String): void {
     if (this.isClearingFilters) return;
     this.areas = [];
+    this.currentArea = '';
     if (lineUuid) {
       this.lookupsService.loadLineAreas(lineUuid)
         .subscribe((areasData: OrderDataLookup[]) => {
@@ -108,6 +109,7 @@ export class OrderFiltersComponent implements OnInit {
   public onAreaChanged(areaUuid: String): void {
     if (this.isClearingFilters) return;
     this.depts = [];
+    this.currentDept = '';
     if (areaUuid) {
       this.lookupsService.loadAreadepts(areaUuid)
         .subscribe((deptsData: OrderDataLookup[]) => {
@@ -119,6 +121,7 @@ export class OrderFiltersComponent implements OnInit {
   public onDeptChanged(deptUuid: String) {
     if (this.isClearingFilters) return;
     this.machines = [];
+    this.currentMachine = '';
     if (deptUuid) {
       this.lookupsService.loadDeptMachines(deptUuid)
         .subscribe((machinesData: OrderDataLookup[]) => {
