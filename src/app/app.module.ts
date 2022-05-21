@@ -21,8 +21,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { OrdersSearchComponent } from './orders-search/orders-search.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     EditOrderComponent,
     OrdersListComponent,
     OrderFiltersComponent,
-    OrderPropertiesComponent
+    OrderPropertiesComponent,
+    OrdersSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatButtonModule,
     MatTableModule,
     FlexLayoutModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

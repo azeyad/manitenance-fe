@@ -1,15 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { WorkOrderModel } from '../models/work-order-model';
-import { Observable, ReplaySubject } from 'rxjs';
-import { WorkOrdersDataService } from '../services/work-orders-data.service';
+import { merge, Observable, ReplaySubject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
+import { WorkOrdersSearchResponseModel } from '../models/work-orders-searc-response-model';
 
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.component.html',
   styleUrls: ['./orders-list.component.css']
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, AfterViewInit {
   dataSource: WorkOrdersDataSource = new WorkOrdersDataSource([]);
   displayedColumns: string[] = ['code', 'creationDate', 'machine', 'department', 'area', 'status', 'assignee'];
 
@@ -19,20 +22,51 @@ export class OrdersListComponent implements OnInit {
     this._workOrdersData = value;
     this.dataSource.setData(value);
   }
+  workOrdersTotalCount = 0;
+  pageSize = 10;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @Output() pagingSortingChanged: EventEmitter<WorkOrderPagingSortingModel> = new EventEmitter();
 
-  constructor(private ordersDataService: WorkOrdersDataService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.ordersDataService.searchWorkOrders({ status: 'FYI' })
-      .subscribe({
-        next: (orders: WorkOrderModel[]) => this.dataSource.setData(orders),
-        error: error => {
-          alert(JSON.stringify(error));
-        }
-      }
-      )
+
   }
 
+  ngAfterViewInit() {
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    merge(this.sort.sortChange, this.paginator.page)
+      .subscribe(() => {
+        this.pagingSortingChanged.emit(this.getCurrentPagingSorting());
+      });
+  }
+
+  public getCurrentPagingSorting(): WorkOrderPagingSortingModel {
+    return {
+      sort: this.sort.active,
+      direction: this.sort.direction,
+      page: this.paginator.pageIndex,
+      size: this.pageSize
+    };
+  }
+
+  public setWOrkOrders(workOrdersResponseModel: WorkOrdersSearchResponseModel) {
+    this.dataSource.setData(workOrdersResponseModel.workOrders);
+    this.workOrdersTotalCount = workOrdersResponseModel.totalOrdersCount;
+  }
+
+  public reset() {
+    this.dataSource.setData([])
+    this.resetPagingAndSorting();
+  }
+
+  private resetPagingAndSorting(): void {
+    this.paginator.pageIndex = 0;
+    this.sort.active = "creationDate";
+    this.sort.direction = "desc";
+  }
 }
 
 class WorkOrdersDataSource extends DataSource<WorkOrderModel> {
