@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
-import { OrderDataLookup, OrderStatusLookup } from '../models/order-data-lookup.model';
+import { OrderDataLookup } from '../models/order-data-lookup.model';
 import { WorkOrdersSearchParameters } from '../models/work-orders-search-parameters';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
 
@@ -73,7 +73,7 @@ export class OrderFiltersComponent implements OnInit {
   depts: OrderDataLookup[] = [];
   machines: OrderDataLookup[] = [];
   users: OrderDataLookup[] = [];
-  statuses: OrderStatusLookup[] = [];
+  statuses: OrderDataLookup[] = [];
 
   private isClearingFilters = false;
 
@@ -97,34 +97,40 @@ export class OrderFiltersComponent implements OnInit {
   public onLineChanged(lineUuid: String): void {
     if (this.isClearingFilters) return;
     this.areas = [];
-    this.lookupsService.loadLineAreas(lineUuid)
-      .subscribe((areasData: OrderDataLookup[]) => {
-        this.areas = areasData;
-      });
+    if (lineUuid) {
+      this.lookupsService.loadLineAreas(lineUuid)
+        .subscribe((areasData: OrderDataLookup[]) => {
+          this.areas = areasData;
+        });
+    }
   }
 
   public onAreaChanged(areaUuid: String): void {
     if (this.isClearingFilters) return;
     this.depts = [];
-    this.lookupsService.loadAreadepts(areaUuid)
-      .subscribe((deptsData: OrderDataLookup[]) => {
-        this.depts = deptsData;
-      });
+    if (areaUuid) {
+      this.lookupsService.loadAreadepts(areaUuid)
+        .subscribe((deptsData: OrderDataLookup[]) => {
+          this.depts = deptsData;
+        });
+    }
   }
 
   public onDeptChanged(deptUuid: String) {
     if (this.isClearingFilters) return;
     this.machines = [];
-    this.lookupsService.loadDeptMachines(deptUuid)
-      .subscribe((machinesData: OrderDataLookup[]) => {
-        this.machines = machinesData;
-      });
+    if (deptUuid) {
+      this.lookupsService.loadDeptMachines(deptUuid)
+        .subscribe((machinesData: OrderDataLookup[]) => {
+          this.machines = machinesData;
+        });
+    }
   }
 
   private loadStatuses(): void {
     this.statuses = [];
     this.lookupsService.loadOrderStatuses()
-      .subscribe((statusesData: OrderStatusLookup[]) => {
+      .subscribe((statusesData: OrderDataLookup[]) => {
         this.statuses = statusesData;
       });
   }

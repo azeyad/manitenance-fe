@@ -32,7 +32,7 @@
           <mat-label>Select line</mat-label>
           <mat-select [(value)]="currentLine">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let line of lines" [value]="line.uuid">{{line.value}}</mat-option>
+            <mat-option *ngFor="let line of lines" [value]="line.key">{{line.value}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -44,7 +44,7 @@
           <mat-label>Select area</mat-label>
           <mat-select [(value)]="currentArea">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let area of areas" [value]="area.uuid">{{area.value}}</mat-option>
+            <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -58,7 +58,7 @@
           <mat-label>Select department</mat-label>
           <mat-select [(value)]="currentDept">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let dept of depts" [value]="dept.uuid">{{dept.value}}</mat-option>
+            <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -70,7 +70,7 @@
           <mat-label>Select equipment</mat-label>
           <mat-select [(value)]="currentMachine">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let machine of machines" [value]="machine.uuid">{{machine.value}}</mat-option>
+            <mat-option *ngFor="let machine of machines" [value]="machine.key">{{machine.value}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
@@ -115,7 +115,7 @@
           <mat-label>Select assignee</mat-label>
           <mat-select [(value)]="currentAssignee">
             <mat-option>None</mat-option>
-            <mat-option *ngFor="let user of users" [value]="user.uuid">{{user.value}}</mat-option>
+            <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>

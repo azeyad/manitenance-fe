@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { OrderDataLookup, OrderStatusLookup } from '../models/order-data-lookup.model';
+import { OrderDataLookup } from '../models/order-data-lookup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,7 @@ export class OrderLookupDataService {
     return this.httpClient.get<OrderDataLookup[]>("/api/v1/user/lookup/users")
   }
 
-  public loadOrderStatuses(): Observable<OrderStatusLookup[]> {
-    return this.httpClient.get<OrderStatusLookup[]>("/api/v1/user/lookup/orderStatuses")
+  public loadOrderStatuses(): Observable<OrderDataLookup[]> {
+    return this.httpClient.get<OrderDataLookup[]>("/api/v1/user/lookup/orderStatuses")
   }
 }
