@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import * as moment from 'moment';
 import { OrderDataLookup, OrderStatusLookup } from '../models/order-data-lookup.model';
 import { WorkOrdersSearchParameters } from '../models/work-orders-search-parameters';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
@@ -64,6 +65,8 @@ export class OrderFiltersComponent implements OnInit {
 
   description: String = '';
   orderNumber: String = '';
+  orderDateFrom: Date | null;
+  orderDateTo: Date | null;
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];
@@ -149,6 +152,8 @@ export class OrderFiltersComponent implements OnInit {
     this.isClearingFilters = false;
     this.description = '';
     this.orderNumber = '';
+    this.orderDateFrom = null;
+    this.orderDateTo = null;
   }
 
   public searchOrders(): void {
@@ -164,7 +169,9 @@ export class OrderFiltersComponent implements OnInit {
       description: this.description,
       orderSequence: this.orderNumber,
       status: this._currentStatus,
-      personnelUuid: this.currentAssignee
+      personnelUuid: this.currentAssignee,
+      from: moment(this.orderDateFrom).format('YYYY-MM-DD'),
+      to: moment(this.orderDateTo).format('YYYY-MM-DD')
     };
   }
 

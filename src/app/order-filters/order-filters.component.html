@@ -12,8 +12,8 @@
       <td>
         <mat-form-field appearance="fill">
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="from">
-            <input matEndDate placeholder="to">
+            <input matStartDate placeholder="from" [(ngModel)]="orderDateFrom">
+            <input matEndDate placeholder="to" [(ngModel)]="orderDateTo">
           </mat-date-range-input>
           <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

@@ -1,6 +1,6 @@
 export interface WorkOrdersSearchParameters {
-    from?: Date;
-    to?: Date;
+    from?: String;
+    to?: String;
     lineUuid?: String;
     departmentUuid?: String
     areaUuid?: String;
@@ -8,5 +8,5 @@ export interface WorkOrdersSearchParameters {
     description?: String;
     orderSequence?: String;
     status?: String;
-    personnelUuid?: String;
+    personnelUuid?: String;    
 }
