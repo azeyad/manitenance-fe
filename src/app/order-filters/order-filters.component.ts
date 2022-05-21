@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { OrderDataLookup, OrderStatusLookup } from '../models/order-data-lookup.model';
 import { WorkOrdersSearchParameters } from '../models/work-orders-search-parameters';
