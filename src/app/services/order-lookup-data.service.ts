@@ -15,11 +15,11 @@ export class OrderLookupDataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public loadLines(): Observable<OrderDataLookup[]> {
+  loadLines(): Observable<OrderDataLookup[]> {
     return this.httpClient.get<OrderDataLookup[]>("/api/v1/user/lookup/lines")
   }
 
-  public loadLineAreas(lineUuid: String): Observable<OrderDataLookup[]> {
+  loadLineAreas(lineUuid: String): Observable<OrderDataLookup[]> {
     if (this.areasCache.has(lineUuid)) {
       return of(this.areasCache.get(lineUuid)) as Observable<OrderDataLookup[]>;
     }
@@ -28,7 +28,7 @@ export class OrderLookupDataService {
     );
   }
 
-  public loadAreadepts(areaUuid: String): Observable<OrderDataLookup[]> {
+  loadAreadepts(areaUuid: String): Observable<OrderDataLookup[]> {
     if (this.deptsCache.has(areaUuid)) {
       return of(this.deptsCache.get(areaUuid)) as Observable<OrderDataLookup[]>;
     }
@@ -37,7 +37,7 @@ export class OrderLookupDataService {
     );
   }
 
-  public loadDeptMachines(deptUuid: String): Observable<OrderDataLookup[]> {
+  loadDeptMachines(deptUuid: String): Observable<OrderDataLookup[]> {
     if (this.machinesCache.has(deptUuid)) {
       return of(this.machinesCache.get(deptUuid)) as Observable<OrderDataLookup[]>;
     }
@@ -46,11 +46,11 @@ export class OrderLookupDataService {
     );
   }
 
-  public loadUsers(): Observable<OrderDataLookup[]> {
+  loadUsers(): Observable<OrderDataLookup[]> {
     return this.httpClient.get<OrderDataLookup[]>("/api/v1/user/lookup/users")
   }
 
-  public loadOrderStatuses(): Observable<OrderDataLookup[]> {
+  loadOrderStatuses(): Observable<OrderDataLookup[]> {
     return this.httpClient.get<OrderDataLookup[]>("/api/v1/user/lookup/orderStatuses")
   }
 }

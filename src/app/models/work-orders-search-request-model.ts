@@ -1,4 +1,4 @@
-export interface WorkOrdersSearchParameters {
+export interface WorkOrdersSearchRequestModel {
     from?: String;
     to?: String;
     lineUuid?: String;
@@ -6,7 +6,7 @@ export interface WorkOrdersSearchParameters {
     areaUuid?: String;
     machineUuid?: String;
     description?: String;
-    orderSequence?: String;
+    orderCode?: String;
     status?: String;
     personnelUuid?: String;    
 }

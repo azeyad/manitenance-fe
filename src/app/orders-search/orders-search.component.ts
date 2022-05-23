@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { finalize } from 'rxjs';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
-import { WorkOrdersSearchResponseModel } from '../models/work-orders-searc-response-model';
-import { WorkOrdersSearchParameters } from '../models/work-orders-search-parameters';
+import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-response-model';
+import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-request-model';
 import { OrderFiltersComponent } from '../order-filters/order-filters.component';
 import { OrdersListComponent } from '../orders-list/orders-list.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
@@ -18,7 +18,7 @@ export class OrdersSearchComponent implements OnInit {
   @ViewChild(OrdersListComponent) ordersListComponenet: OrdersListComponent;
   @ViewChild(OrderFiltersComponent) orderFiltersComponent: OrderFiltersComponent;
 
-  public isLoading = false;
+  isLoading = false;
 
   constructor(private ordersDataService: WorkOrdersDataService) { }
 
@@ -28,7 +28,7 @@ export class OrdersSearchComponent implements OnInit {
 
 
   private loadTodayWorkOrders() {
-    const searchFilters: WorkOrdersSearchParameters = {
+    const searchFilters: WorkOrdersSearchRequestModel = {
       from: moment(Date.now()).format('YYYY-MM-DD'),
       to: moment(Date.now()).format('YYYY-MM-DD'),
     };
@@ -41,13 +41,13 @@ export class OrdersSearchComponent implements OnInit {
     this.searchWorkOrders(searchFilters, pagingSortingParams);
   }
 
-  public onFiltersChanged(searchFilters: WorkOrdersSearchParameters): void {    
+  onFiltersChanged(searchFilters: WorkOrdersSearchRequestModel): void {    
     this.ordersListComponenet.reset();
     const pagingSortingParams: WorkOrderPagingSortingModel = this.ordersListComponenet.getCurrentPagingSorting();
     this.searchWorkOrders(searchFilters, pagingSortingParams);
   }
 
-  private searchWorkOrders(searchFilters: WorkOrdersSearchParameters, pagingSortingParams: WorkOrderPagingSortingModel) {
+  private searchWorkOrders(searchFilters: WorkOrdersSearchRequestModel, pagingSortingParams: WorkOrderPagingSortingModel) {
     this.isLoading = true;
     this.ordersDataService.searchWorkOrders(searchFilters, pagingSortingParams).pipe(
       finalize(() => this.isLoading = false)
@@ -59,8 +59,8 @@ export class OrdersSearchComponent implements OnInit {
     });
   }
 
-  public onPagingSortingChanged(pagingSortingParams: WorkOrderPagingSortingModel) {
-    const searchFilters: WorkOrdersSearchParameters = this.orderFiltersComponent.getCurrentFilters();
+  onPagingSortingChanged(pagingSortingParams: WorkOrderPagingSortingModel) {
+    const searchFilters: WorkOrdersSearchRequestModel = this.orderFiltersComponent.getCurrentFilters();
     this.searchWorkOrders(searchFilters, pagingSortingParams);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { OrderDataLookup } from '../models/order-data-lookup.model';
-import { WorkOrdersSearchParameters } from '../models/work-orders-search-parameters';
+import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-request-model';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
 
 @Component({
@@ -12,61 +12,47 @@ import { OrderLookupDataService } from '../services/order-lookup-data.service';
 export class OrderFiltersComponent implements OnInit {
 
   private _currentLine: String = '';
-  public get currentLine(): String {
+  get currentLine(): String {
     return this._currentLine;
   }
-  public set currentLine(value: String) {
+  set currentLine(value: String) {
     this._currentLine = value;
     this.onLineChanged(value);
   }
 
 
   private _currentArea: String = '';
-  public get currentArea(): String {
+  get currentArea(): String {
     return this._currentArea;
   }
-  public set currentArea(value: String) {
+  set currentArea(value: String) {
     this._currentArea = value;
     this.onAreaChanged(value);
   }
 
   private _currentMachine: String = '';
-  public get currentMachine(): String {
+  get currentMachine(): String {
     return this._currentMachine;
   }
-  public set currentMachine(value: String) {
+  set currentMachine(value: String) {
     this._currentMachine = value;
   }
 
   private _currentDept: String = '';
-  public get currentDept(): String {
+  get currentDept(): String {
     return this._currentDept;
   }
-  public set currentDept(value: String) {
+  set currentDept(value: String) {
     this._currentDept = value;
     this.onDeptChanged(value);
   }
 
-  private _currentAssignee: String = '';
-  public get currentAssignee(): String {
-    return this._currentAssignee;
-  }
-  public set currentAssignee(value: String) {
-    this._currentAssignee = value;
-  }
-
-  private _currentStatus: String = '';
-  public get currentStatus(): String {
-    return this._currentStatus;
-  }
-  public set currentStatus(value: String) {
-    this._currentStatus = value;
-  }
-
+  currentAssignee: String;
+  currentStatus: String;
   description: String = '';
   orderNumber: String = '';
-  orderDateFrom: Date | null;
-  orderDateTo: Date | null;
+  orderDateFrom: Date | null = null;
+  orderDateTo: Date | null = null;
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];
@@ -77,7 +63,7 @@ export class OrderFiltersComponent implements OnInit {
 
   private isClearingFilters = false;
 
-  @Output() filtersChanged: EventEmitter<WorkOrdersSearchParameters> = new EventEmitter();
+  @Output() filtersChanged: EventEmitter<WorkOrdersSearchRequestModel> = new EventEmitter();
 
   constructor(private lookupsService: OrderLookupDataService) { }
 
@@ -94,7 +80,7 @@ export class OrderFiltersComponent implements OnInit {
       });
   }
 
-  public onLineChanged(lineUuid: String): void {
+  onLineChanged(lineUuid: String): void {
     if (this.isClearingFilters) return;
     this.areas = [];
     this.currentArea = '';
@@ -106,7 +92,7 @@ export class OrderFiltersComponent implements OnInit {
     }
   }
 
-  public onAreaChanged(areaUuid: String): void {
+  onAreaChanged(areaUuid: String): void {
     if (this.isClearingFilters) return;
     this.depts = [];
     this.currentDept = '';
@@ -118,7 +104,7 @@ export class OrderFiltersComponent implements OnInit {
     }
   }
 
-  public onDeptChanged(deptUuid: String) {
+  onDeptChanged(deptUuid: String) {
     if (this.isClearingFilters) return;
     this.machines = [];
     this.currentMachine = '';
@@ -147,7 +133,7 @@ export class OrderFiltersComponent implements OnInit {
 
   }
 
-  public clearFilters(): void {
+  clearFilters(): void {
     this.isClearingFilters = true;
     this.currentLine = '';
     this.currentArea = '';
@@ -165,22 +151,22 @@ export class OrderFiltersComponent implements OnInit {
     this.orderDateTo = null;
   }
 
-  public searchOrders(): void {
+  searchOrders(): void {
     this.filtersChanged.emit(this.getCurrentFilters());
   }
 
-  public getCurrentFilters(): WorkOrdersSearchParameters {
+  getCurrentFilters(): WorkOrdersSearchRequestModel {
     return {
       lineUuid: this._currentLine,
       areaUuid: this._currentArea,
       departmentUuid: this._currentDept,
       machineUuid: this._currentMachine,
       description: this.description,
-      orderSequence: this.orderNumber,
-      status: this._currentStatus,
+      orderCode: this.orderNumber,
+      status: this.currentStatus,
       personnelUuid: this.currentAssignee,
-      from: moment(this.orderDateFrom).format('YYYY-MM-DD'),
-      to: moment(this.orderDateTo).format('YYYY-MM-DD')
+      from: this.orderDateFrom ? moment(this.orderDateFrom).format('YYYY-MM-DD') : '',
+      to: this.orderDateTo ? moment(this.orderDateTo).format('YYYY-MM-DD') : ''
     };
   }
 

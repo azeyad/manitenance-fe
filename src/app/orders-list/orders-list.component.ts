@@ -5,7 +5,7 @@ import { merge, Observable, ReplaySubject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
-import { WorkOrdersSearchResponseModel } from '../models/work-orders-searc-response-model';
+import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-response-model';
 
 @Component({
   selector: 'app-orders-list',
@@ -43,7 +43,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
       });
   }
 
-  public getCurrentPagingSorting(): WorkOrderPagingSortingModel {
+  getCurrentPagingSorting(): WorkOrderPagingSortingModel {
     return {
       sort: this.sort.active,
       direction: this.sort.direction,
@@ -52,12 +52,12 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     };
   }
 
-  public setWOrkOrders(workOrdersResponseModel: WorkOrdersSearchResponseModel) {
+  setWOrkOrders(workOrdersResponseModel: WorkOrdersSearchResponseModel) {
     this.dataSource.setData(workOrdersResponseModel.workOrders);
     this.workOrdersTotalCount = workOrdersResponseModel.totalOrdersCount;
   }
 
-  public reset() {
+  reset() {
     this.dataSource.setData([])
     this.resetPagingAndSorting();
   }
