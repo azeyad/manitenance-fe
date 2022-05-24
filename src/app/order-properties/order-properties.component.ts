@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import * as moment from 'moment';
 import { OrderDataLookup } from '../models/order-data-lookup.model';
+import { WorkOrderModel } from '../models/work-order-model';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
 
 @Component({
@@ -49,6 +51,7 @@ export class OrderPropertiesComponent implements OnInit {
   currentStatus: String = '';
   description: String = '';
   orderNumber: String = '';
+  orderDate: Date | null = null;
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];
@@ -59,14 +62,14 @@ export class OrderPropertiesComponent implements OnInit {
 
   constructor(private lookupsService: OrderLookupDataService) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.loadUsers();
     this.loadStatuses();
     this.loadLines();
   }
-  
+
   private loadLines(): void {
     this.lookupsService.loadLines()
       .subscribe((linesData: OrderDataLookup[]) => {
@@ -101,7 +104,7 @@ export class OrderPropertiesComponent implements OnInit {
 
   onDeptChanged(deptUuid: String) {
     this.machines = [];
-    this.currentMachine = '';    
+    this.currentMachine = '';
     if (deptUuid) {
       this.lookupsService.loadDeptMachines(deptUuid)
         .subscribe((machinesData: OrderDataLookup[]) => {
@@ -124,23 +127,23 @@ export class OrderPropertiesComponent implements OnInit {
       .subscribe((usersData: OrderDataLookup[]) => {
         this.users = usersData;
       });
-
   }
 
-  cancel(): void {
-
+  getOrderModel(): WorkOrderModel {
+    const model: WorkOrderModel = {
+      description: this.description,
+      code: this.orderNumber,
+      creationDate: moment(this.orderDate).format('YYYY-MM-DD'),
+      machine: this._currentMachine,
+      department: this._currentDept,
+      area: this._currentArea,
+      status: this.currentStatus,
+      assignee: this.currentAssignee
+    }
+    return model;
   }
 
-  addNotes(): void {
-
+  isValid(): boolean {
+    return true;
   }
-
-  addFiles(): void {
-
-  }
-
-  submit(): void {
-    alert(this.currentLine +","+ this.currentArea +","+ this.currentDept +","+ this.currentMachine);
-  }
-
 }

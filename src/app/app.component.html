@@ -30,9 +30,9 @@
                         </a>
                     </li>
                     <li>
-                        <a routerLink="/dashboard">
-                            <mat-icon class="icon">dashboard</mat-icon>
-                            <span class="label">Dashboard</span>
+                        <a routerLink="/new">
+                            <mat-icon class="icon">new</mat-icon>
+                            <span class="label">create order</span>
                         </a>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@
             </div>
         </mat-toolbar>
         <main>
-            <app-orders-search></app-orders-search>
+            <router-outlet></router-outlet>
         </main>
     </mat-sidenav-content>
 </mat-sidenav-container>
