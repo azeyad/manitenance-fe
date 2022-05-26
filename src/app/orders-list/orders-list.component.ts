@@ -14,7 +14,7 @@ import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-resp
 })
 export class OrdersListComponent implements OnInit, AfterViewInit {
   dataSource: WorkOrdersDataSource = new WorkOrdersDataSource([]);
-  displayedColumns: string[] = ['code', 'creationDate', 'machine', 'department', 'area', 'status', 'assignee'];
+  displayedColumns: string[] = ['actions', 'code', 'description', 'creationDate', 'machine', 'department', 'area', 'status', 'assignee'];
 
   _workOrdersData: WorkOrderModel[] = [];
   @Input()
