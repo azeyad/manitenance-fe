@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { OrderDataLookup } from '../models/order-data-lookup.model';
 import { WorkOrderModel } from '../models/work-order-model';
+import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
 
 @Component({
@@ -129,16 +131,20 @@ export class OrderPropertiesComponent implements OnInit {
       });
   }
 
-  getOrderModel(): WorkOrderModel {
-    const model: WorkOrderModel = {
+  orderDateChanged(date: MatDatepickerInputEvent<Date>) {
+    this.orderDate = date.value;
+  }
+
+  getOrderCreateRequestModel(): WorkOrdersCreateRequestModel {
+    const model: WorkOrdersCreateRequestModel = {
       description: this.description,
-      code: this.orderNumber,
-      creationDate: moment(this.orderDate).format('YYYY-MM-DD'),
-      machine: this._currentMachine,
-      department: this._currentDept,
-      area: this._currentArea,
-      status: this.currentStatus,
-      assignee: this.currentAssignee
+      lineUuid: this.currentLine,
+      creationDate: this.orderDate ? moment(this.orderDate).format('YYYY-MM-DD') : '',
+      machineUuid: this._currentMachine,
+      deptUuid: this._currentDept,
+      areaUuid: this._currentArea,
+      orderStatus: this.currentStatus,
+      assigneeUuid: this.currentAssignee
     }
     return model;
   }

@@ -1,6 +1,8 @@
+import * as moment from "moment";
+
 export interface WorkOrdersSearchRequestModel {
-    from?: String;
-    to?: String;
+    from?: String | null;
+    to?: String | null;
     lineUuid?: String;
     departmentUuid?: String
     areaUuid?: String;

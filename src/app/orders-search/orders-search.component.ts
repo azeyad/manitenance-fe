@@ -29,8 +29,8 @@ export class OrdersSearchComponent implements OnInit {
 
   private loadTodayWorkOrders() {
     const searchFilters: WorkOrdersSearchRequestModel = {
-      from: moment(Date.now()).format('YYYY-MM-DD'),
-      to: moment(Date.now()).format('YYYY-MM-DD'),
+      from: moment().format('YYYY-MM-DD'),
+      to: moment().format('YYYY-MM-DD')
     };
     const pagingSortingParams: WorkOrderPagingSortingModel = {
       page: 0,

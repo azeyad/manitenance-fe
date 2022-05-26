@@ -1,5 +1,6 @@
 export interface WorkOrderModel {
     uuid?: String;
+    line: String;
     description: String;
     code: String;
     creationDate: String;
