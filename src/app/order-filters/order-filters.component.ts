@@ -166,7 +166,7 @@ export class OrderFiltersComponent implements OnInit {
       status: this.currentStatus,
       personnelUuid: this.currentAssignee,
       from: this.orderDateFrom ? moment(this.orderDateFrom).format('YYYY-MM-DD') : null,
-      to: this.orderDateTo ? moment(this.orderDateTo).format('YYYY-MM-DD') : null
+      to: this.orderDateTo ? moment(this.orderDateTo).format('YYYY-MM-DD') : this.orderDateFrom ? moment(this.orderDateFrom).format('YYYY-MM-DD') : null
     };
   }
 
