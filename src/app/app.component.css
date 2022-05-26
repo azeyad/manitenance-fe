@@ -8,12 +8,12 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   
   a {
     text-decoration: none;
-    color:gray;
+    color:white;
   }
   
   a:hover,
   a:active {
-    color: black;
+    color: lightgrey;
   }
   
   .navigation-items {

@@ -2,17 +2,14 @@
     <br>
     <div class="container">
         <div fxLayout="row" fxLayoutAlign="flex-start center" class="content">
-            <mat-card class="card">
-                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                    <h3>Create new work order</h3>
-                </mat-card-title>
+            <mat-card class="card">                
                 <mat-card-content>
                     <app-order-properties></app-order-properties>
                 </mat-card-content>
                 <mat-card-actions fxLayoutAlign="flex-end">
                     <button class="mat-raised-button" mat-button (click)="cancel()">Cancel</button>
                     <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="submit"
-                        (click)="save()">Save</button>
+                        (click)="save()">Create order</button>
                     <button class="mat-raised-button" mat-button (click)="addNotes()">Add notes</button>
                     <button class="mat-raised-button" mat-button (click)="addFiles()">Add files</button>
                 </mat-card-actions>
