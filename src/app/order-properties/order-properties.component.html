@@ -7,14 +7,12 @@
                         Date:
                     </td>
                     <td>
-                        <div class="form-group">                            
-                            <mat-form-field appearance="fill">                                
-                                <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="orderDate" required>
-                                <mat-hint>MM/DD/YYYY</mat-hint>
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                          </div>
+                        <mat-form-field appearance="fill">
+                            <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="orderDate" required>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
 
                     </td>
                     <td>
@@ -22,8 +20,8 @@
                     </td>
                     <td>
                         <mat-form-field appearance="fill">
-                            <input matInput placeholder="Type description" [(ngModel)]="description"
-                                name="description" required/>
+                            <input class="form-control" matInput placeholder="Type description"
+                                [(ngModel)]="description" #descr="ngModel" name="description" required />
                         </mat-form-field>
                     </td>
                 </tr>
@@ -38,7 +36,6 @@
                                     {{status.value}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        {{currentStatus}}
                     </td>
                     <td>Responsible:</td>
                     <td>
