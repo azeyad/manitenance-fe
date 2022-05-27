@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
 import { OrderDataLookup } from '../models/order-data-lookup.model';
-import { WorkOrderModel } from '../models/work-order-model';
 import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
 import { OrderLookupDataService } from '../services/order-lookup-data.service';
 
@@ -12,6 +11,8 @@ import { OrderLookupDataService } from '../services/order-lookup-data.service';
   styleUrls: ['./order-properties.component.css']
 })
 export class OrderPropertiesComponent implements OnInit {
+
+  @ViewChild('orderForm', { read: NgForm }) orderForm: NgForm;
 
   private _currentLine: String = '';
   get currentLine(): String {
@@ -53,7 +54,7 @@ export class OrderPropertiesComponent implements OnInit {
   currentStatus: String = '';
   description: String = '';
   orderNumber: String = '';
-  orderDate: Date | null = null;
+  orderDate: Date = new Date(moment.now());
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];
@@ -131,10 +132,6 @@ export class OrderPropertiesComponent implements OnInit {
       });
   }
 
-  orderDateChanged(date: MatDatepickerInputEvent<Date>) {
-    this.orderDate = date.value;
-  }
-
   getOrderCreateRequestModel(): WorkOrdersCreateRequestModel {
     const model: WorkOrdersCreateRequestModel = {
       description: this.description,
@@ -150,6 +147,6 @@ export class OrderPropertiesComponent implements OnInit {
   }
 
   isValid(): boolean {
-    return true;
+    return this.orderForm && this.orderForm.valid ? true : false;
   }
 }

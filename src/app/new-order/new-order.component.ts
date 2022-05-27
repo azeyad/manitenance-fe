@@ -32,7 +32,11 @@ export class NewOrderComponent implements OnInit {
 
   }
 
-  save(): void {
+  canSubmit(): boolean {
+    return this.orderPropertiesComponent && this.orderPropertiesComponent.isValid();
+  }
+
+  submit(): void {
     const orderModel: WorkOrdersCreateRequestModel = this.orderPropertiesComponent.getOrderCreateRequestModel();
     this.workOrderDataService.saveWorkOrder(orderModel)
       .subscribe({
