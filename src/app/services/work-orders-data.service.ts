@@ -5,6 +5,7 @@ import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting
 import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-response-model';
 import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-request-model';
 import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
+import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class WorkOrdersDataService {
 
   saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel) {
     return this.httpClient.post('/api/v1/user/workorder/create', workorderModel);
+  }
+
+  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel) {
+    return this.httpClient.put('/api/v1/user/workorder/create', workorderModel);
   }
 }

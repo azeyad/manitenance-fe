@@ -1,1 +1,18 @@
-<p>edit-order works!</p>
+<div>
+    <br>
+    <div class="container">
+        <div fxLayout="row" fxLayoutAlign="flex-start center" class="content">
+            <mat-card class="card">                
+                <mat-card-content>
+                    <app-order-properties></app-order-properties>
+                </mat-card-content>
+                <mat-card-actions fxLayoutAlign="flex-end">
+                    <button class="mat-raised-button" mat-button (click)="cancel()">Cancel</button>
+                    <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="button" [disabled]="!canSubmit()"
+                        (click)="submit()">Save</button>
+                    <button class="mat-raised-button" mat-button (click)="releaseOrder()">Release</button>                    
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-export class WorkOrdersCreateRequestModel {
+export interface WorkOrdersCreateRequestModel {
     lineUuid: String;
     areaUuid: String;
     deptUuid: String;

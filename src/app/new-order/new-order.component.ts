@@ -21,7 +21,7 @@ export class NewOrderComponent implements OnInit {
 
 
   cancel(): void {
-
+    this.router.navigateByUrl('/search');
   }
 
   addNotes(): void {
