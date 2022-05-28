@@ -23,6 +23,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     this._workOrdersData = value;
     this.dataSource.setData(value);
   }
+  @Input() isLoading = false;
   workOrdersTotalCount = 0;
   pageSize = 10;
   @ViewChild(MatPaginator) paginator: MatPaginator;

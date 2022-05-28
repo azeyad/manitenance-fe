@@ -78,7 +78,9 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
                     </div>
-
+                    <div *ngIf="isLoading" class="loading-spinner">
+                        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                    </div>
                     <mat-paginator [length]="workOrdersTotalCount" [pageSize]="pageSize">
                     </mat-paginator>
                 </div>

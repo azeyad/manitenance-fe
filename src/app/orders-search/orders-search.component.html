@@ -1,7 +1,4 @@
 <app-order-filters (filtersChanged)='onFiltersChanged($event)'></app-order-filters>
 <br />
-<app-orders-list (pagingSortingChanged)='onPagingSortingChanged($event)'
+<app-orders-list [isLoading]="isLoading" (pagingSortingChanged)='onPagingSortingChanged($event)'
     (removeOrderRequest)="onRemoveWorkOrder($event)"></app-orders-list>
-<div *ngIf="isLoading" class="search-loading-spinner">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</div>
