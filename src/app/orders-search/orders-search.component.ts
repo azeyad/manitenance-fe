@@ -41,7 +41,7 @@ export class OrdersSearchComponent implements OnInit {
     this.searchWorkOrders(searchFilters, pagingSortingParams);
   }
 
-  onFiltersChanged(searchFilters: WorkOrdersSearchRequestModel): void {    
+  onFiltersChanged(searchFilters: WorkOrdersSearchRequestModel): void {
     this.ordersListComponenet.reset();
     const pagingSortingParams: WorkOrderPagingSortingModel = this.ordersListComponenet.getCurrentPagingSorting();
     this.searchWorkOrders(searchFilters, pagingSortingParams);
@@ -59,8 +59,29 @@ export class OrdersSearchComponent implements OnInit {
     });
   }
 
+  reloadWorkOrders() {
+    this.ordersListComponenet.reset();
+    const pagingSortingParams: WorkOrderPagingSortingModel = this.ordersListComponenet.getCurrentPagingSorting();
+    const searchFilters: WorkOrdersSearchRequestModel = this.orderFiltersComponent.getCurrentFilters();
+    this.searchWorkOrders(searchFilters, pagingSortingParams);
+  }
+
   onPagingSortingChanged(pagingSortingParams: WorkOrderPagingSortingModel) {
     const searchFilters: WorkOrdersSearchRequestModel = this.orderFiltersComponent.getCurrentFilters();
     this.searchWorkOrders(searchFilters, pagingSortingParams);
+  }
+
+  onRemoveWorkOrder(orderUuid: String) {
+    this.ordersDataService.removeWorkOrder(orderUuid)
+      .subscribe({
+        next: () => {
+          alert("Order removed successfuly");
+          this.reloadWorkOrders();
+        },
+        error: (error) => {
+          alert("Failed to remove work order");
+          alert(JSON.stringify(error));
+        }
+      });
   }
 }
