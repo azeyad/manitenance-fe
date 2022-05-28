@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { OrderPropertiesComponent } from '../order-properties/order-properties.component';
@@ -24,7 +25,7 @@ export class EditOrderComponent implements OnInit {
   orderNumber: String;
   orderDate: Date;
 
-  constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
 
   ngOnInit(): void {
@@ -44,8 +45,10 @@ export class EditOrderComponent implements OnInit {
             this.orderNumber = workOrder.code;
             this.orderDate = workOrder.creationDate;
           },
-          error: (error) => {
-            alert(JSON.stringify(error));
+          error: () => {
+            this.snackBar.open("Failed to load work order", "Error!", {
+              duration: 2000
+            });
           }
         })
     } else {
@@ -66,10 +69,15 @@ export class EditOrderComponent implements OnInit {
     this.workOrderDataService.editWorkOrder(orderModel)
       .subscribe({
         next: () => {
+          this.snackBar.open("Work order updated successfully", "Success!", {
+            duration: 2000
+          });
           this.router.navigateByUrl('/search');
         },
-        error: (error) => {
-          alert(JSON.stringify(error));
+        error: () => {
+          this.snackBar.open("Failed to update work order", "Error!", {
+            duration: 2000
+          });
         }
       })
   }

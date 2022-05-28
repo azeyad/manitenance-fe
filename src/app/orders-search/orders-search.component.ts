@@ -7,6 +7,7 @@ import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-reque
 import { OrderFiltersComponent } from '../order-filters/order-filters.component';
 import { OrdersListComponent } from '../orders-list/orders-list.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders-search',
@@ -20,7 +21,7 @@ export class OrdersSearchComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private ordersDataService: WorkOrdersDataService) { }
+  constructor(private ordersDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadTodayWorkOrders();
@@ -53,8 +54,10 @@ export class OrdersSearchComponent implements OnInit {
       finalize(() => this.isLoading = false)
     ).subscribe({
       next: (orders: WorkOrdersSearchResponseModel) => this.ordersListComponenet.setWOrkOrders(orders),
-      error: error => {
-        alert(JSON.stringify(error));
+      error: () => {
+        this.snackBar.open("Failed to search work order", "Error!", {
+          duration: 2000
+        });
       }
     });
   }
@@ -75,12 +78,15 @@ export class OrdersSearchComponent implements OnInit {
     this.ordersDataService.removeWorkOrder(orderUuid)
       .subscribe({
         next: () => {
-          alert("Order removed successfuly");
+          this.snackBar.open("Order removed successfuly", "Success!", {
+            duration: 2000
+          });
           this.reloadWorkOrders();
         },
-        error: (error) => {
-          alert("Failed to remove work order");
-          alert(JSON.stringify(error));
+        error: () => {
+          this.snackBar.open("Failed to remove work order", "Failed!", {
+            duration: 2000
+          });
         }
       });
   }

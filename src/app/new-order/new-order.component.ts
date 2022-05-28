@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { WorkOrderModel } from '../models/work-order-model';
 import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
@@ -14,7 +15,7 @@ export class NewOrderComponent implements OnInit {
 
   @ViewChild(OrderPropertiesComponent) orderPropertiesComponent: OrderPropertiesComponent;
 
-  constructor(private router: Router, private workOrderDataService: WorkOrdersDataService) { }
+  constructor(private router: Router, private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -41,10 +42,15 @@ export class NewOrderComponent implements OnInit {
     this.workOrderDataService.saveWorkOrder(orderModel)
       .subscribe({
         next: () => {
+          this.snackBar.open("Work order created successfully", "Success!", {
+            duration: 2000
+          });
           this.router.navigateByUrl('/search');
         },
-        error: (error) => {
-          alert(JSON.stringify(error));
+        error: () => {
+          this.snackBar.open("Failed to create work order", "Error!", {
+            duration: 2000
+          });
         }
       })
   }
