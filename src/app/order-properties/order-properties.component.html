@@ -64,10 +64,10 @@
                         </mat-form-field>
                     </td>
 
-                    <td>
+                    <td *ngIf="currentLine">
                         Area:
                     </td>
-                    <td>
+                    <td *ngIf="currentLine">
                         <mat-form-field appearance="fill">
                             <mat-label>Select area</mat-label>
                             <mat-select [(ngModel)]="currentArea" name="area" required>
@@ -79,10 +79,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td *ngIf="currentArea">
                         Department:
                     </td>
-                    <td>
+                    <td *ngIf="currentArea">
                         <mat-form-field appearance="fill">
                             <mat-label>Select department</mat-label>
                             <mat-select [(ngModel)]="currentDept" name="department" required>
@@ -93,10 +93,10 @@
                         </mat-form-field>
                     </td>
 
-                    <td>
+                    <td *ngIf="currentDept">
                         Equipment:
                     </td>
-                    <td>
+                    <td *ngIf="currentDept">
                         <mat-form-field appearance="fill">
                             <mat-label>Select equipment</mat-label>
                             <mat-select [(ngModel)]="currentMachine" name="machine" required>
