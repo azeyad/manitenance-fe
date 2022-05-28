@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
 import { OrderDataLookup } from '../models/order-data-lookup.model';
@@ -14,26 +14,28 @@ export class OrderPropertiesComponent implements OnInit {
 
   @ViewChild('orderForm', { read: NgForm }) orderForm: NgForm;
 
-  private _currentLine: String = '';
+  private _currentLine: String;
+  @Input()
   get currentLine(): String {
     return this._currentLine;
   }
   set currentLine(value: String) {
     this._currentLine = value;
-    this.onLineChanged(value);
+    this.onLineChanged();
   }
 
-
-  private _currentArea: String = '';
+  private _currentArea: String;
+  @Input()
   get currentArea(): String {
     return this._currentArea;
   }
   set currentArea(value: String) {
     this._currentArea = value;
-    this.onAreaChanged(value);
+    this.onAreaChanged();
   }
 
-  private _currentMachine: String = '';
+  private _currentMachine: String;
+  @Input()
   get currentMachine(): String {
     return this._currentMachine;
   }
@@ -41,19 +43,25 @@ export class OrderPropertiesComponent implements OnInit {
     this._currentMachine = value;
   }
 
-  private _currentDept: String = '';
+  private _currentDept: String;
+  @Input()
   get currentDept(): String {
     return this._currentDept;
   }
   set currentDept(value: String) {
     this._currentDept = value;
-    this.onDeptChanged(value);
+    this.onDeptChanged();
   }
 
-  currentAssignee: String = '';
-  currentStatus: String = '';
-  description: String = '';
-  orderNumber: String = '';
+  @Input()
+  currentAssignee: String;
+  @Input()
+  currentStatus: String;
+  @Input()
+  description: String;
+  @Input()
+  orderNumber: String;
+  @Input()
   orderDate: Date = new Date(moment.now());
 
   lines: OrderDataLookup[] = [];
@@ -81,35 +89,41 @@ export class OrderPropertiesComponent implements OnInit {
   }
 
 
-  onLineChanged(lineUuid: String): void {
+  private onLineChanged(): void {
+    if (this.areas.length > 0) {
+      this._currentArea = '';
+      this.onAreaChanged();
+    }
     this.areas = [];
-    this.currentArea = '';
-    this.onAreaChanged('');
-    if (lineUuid) {
-      this.lookupsService.loadLineAreas(lineUuid)
+    if (this._currentLine) {
+      this.lookupsService.loadLineAreas(this._currentLine)
         .subscribe((areasData: OrderDataLookup[]) => {
           this.areas = areasData;
         });
     }
   }
 
-  onAreaChanged(areaUuid: String): void {
+  private onAreaChanged(): void {
+    if (this.depts.length > 0) {
+      this._currentDept = '';
+      this.onDeptChanged();
+    }
     this.depts = [];
-    this.currentDept = '';
-    this.onDeptChanged('');
-    if (areaUuid) {
-      this.lookupsService.loadAreadepts(areaUuid)
+    if (this._currentArea) {
+      this.lookupsService.loadAreadepts(this._currentArea)
         .subscribe((deptsData: OrderDataLookup[]) => {
           this.depts = deptsData;
         });
     }
   }
 
-  onDeptChanged(deptUuid: String) {
+  private onDeptChanged() {
+    if (this.machines.length > 0) {
+      this.currentMachine = '';
+    }
     this.machines = [];
-    this.currentMachine = '';
-    if (deptUuid) {
-      this.lookupsService.loadDeptMachines(deptUuid)
+    if (this.currentDept) {
+      this.lookupsService.loadDeptMachines(this.currentDept)
         .subscribe((machinesData: OrderDataLookup[]) => {
           this.machines = machinesData;
         });
@@ -148,5 +162,9 @@ export class OrderPropertiesComponent implements OnInit {
 
   isValid(): boolean {
     return this.orderForm && this.orderForm.valid ? true : false;
+  }
+
+  isChanged(): boolean {
+    return !this.orderForm.pristine;
   }
 }

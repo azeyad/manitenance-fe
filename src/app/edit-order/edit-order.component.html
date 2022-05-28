@@ -2,15 +2,18 @@
     <br>
     <div class="container">
         <div fxLayout="row" fxLayoutAlign="flex-start center" class="content">
-            <mat-card class="card">                
+            <mat-card class="card">
                 <mat-card-content>
-                    <app-order-properties></app-order-properties>
+                    <app-order-properties [currentArea]="currentArea" [currentAssignee]="currentAssignee"
+                        [currentDept]="currentDept" [currentLine]="currentLine" [currentMachine]="currentMachine"
+                        [currentStatus]="currentStatus" [description]="description" [orderDate]="orderDate"
+                        [orderNumber]="orderNumber"></app-order-properties>
                 </mat-card-content>
                 <mat-card-actions fxLayoutAlign="flex-end">
                     <button class="mat-raised-button" mat-button (click)="cancel()">Cancel</button>
-                    <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="button" [disabled]="!canSubmit()"
-                        (click)="submit()">Save</button>
-                    <button class="mat-raised-button" mat-button (click)="releaseOrder()">Release</button>                    
+                    <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="button"
+                        [disabled]="!canSubmit()" (click)="submit()">Save</button>
+                    <button class="mat-raised-button" mat-button (click)="releaseOrder()">Release</button>
                 </mat-card-actions>
             </mat-card>
         </div>

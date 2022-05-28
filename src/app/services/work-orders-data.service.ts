@@ -6,6 +6,7 @@ import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-resp
 import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-request-model';
 import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
+import { WorkOrderModel } from '../models/work-order-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-reque
 export class WorkOrdersDataService {
 
   constructor(private httpClient: HttpClient) { }
+
+  getWorkOrderByUuid(uuid: String): Observable<WorkOrderModel> {
+    return this.httpClient.get<WorkOrderModel>(`/api/v1/user/workorder/getOrder?uuid=${uuid}`);
+  }
 
   searchWorkOrders(searchParameters: WorkOrdersSearchRequestModel, pagingSortingParams: WorkOrderPagingSortingModel): Observable<WorkOrdersSearchResponseModel> {
     const sortQueryStr = `${pagingSortingParams.sort},${pagingSortingParams.direction}`;
@@ -33,6 +38,6 @@ export class WorkOrdersDataService {
   }
 
   editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel) {
-    return this.httpClient.put('/api/v1/user/workorder/create', workorderModel);
+    return this.httpClient.post('/api/v1/user/workorder/create', workorderModel);
   }
 }

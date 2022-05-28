@@ -13,12 +13,44 @@ export class EditOrderComponent implements OnInit {
 
   @ViewChild(OrderPropertiesComponent) orderPropertiesComponent: OrderPropertiesComponent;
 
-  private orderUuid: String | null;
+  private orderUuid: String;
+  currentLine: String;
+  currentArea: String;
+  currentMachine: String;
+  currentDept: String;
+  currentAssignee: String;
+  currentStatus: String;
+  description: String;
+  orderNumber: String;
+  orderDate: Date;
+
   constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService) { }
 
 
   ngOnInit(): void {
-    this.orderUuid = this.route.snapshot.paramMap.get('orderUuid');
+    const orderUuidRouteParam = this.route.snapshot.paramMap.get('orderUuid');
+    if (orderUuidRouteParam) {
+      this.orderUuid = orderUuidRouteParam;
+      this.workOrderDataService.getWorkOrderByUuid(this.orderUuid)
+        .subscribe({
+          next: workOrder => {
+            this.currentArea = workOrder.areaUuid;
+            this.currentLine = workOrder.lineUuid;
+            this.currentDept = workOrder.departmentUuid;
+            this.currentMachine = workOrder.machineUuid;
+            this.currentAssignee = workOrder.assigneeUuid;
+            this.currentStatus = workOrder.status;
+            this.description = workOrder.description;
+            this.orderNumber = workOrder.code;
+            this.orderDate = workOrder.creationDate;
+          },
+          error: (error) => {
+            alert(JSON.stringify(error));
+          }
+        })
+    } else {
+      this.router.navigateByUrl('/search');
+    }
   }
 
   cancel(): void {
@@ -26,7 +58,7 @@ export class EditOrderComponent implements OnInit {
   }
 
   canSubmit(): boolean {
-    return this.orderUuid != null && this.orderUuid.length > 0 && this.orderPropertiesComponent && this.orderPropertiesComponent.isValid();
+    return this.orderUuid && this.orderPropertiesComponent && this.orderPropertiesComponent.isValid() && this.orderPropertiesComponent.isChanged();
   }
 
   submit(): void {
