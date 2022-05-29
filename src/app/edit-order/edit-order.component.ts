@@ -65,7 +65,7 @@ export class EditOrderComponent implements OnInit {
   }
 
   submit(): void {
-    const orderModel: WorkOrdersUpdateRequestModel = { ...this.orderPropertiesComponent.getOrderCreateRequestModel(), uuid: this.orderUuid ? this.orderUuid : '' };
+    const orderModel: WorkOrdersUpdateRequestModel = { ...this.orderPropertiesComponent.getOrderCreateRequestModel(), workOrderUuid: this.orderUuid ? this.orderUuid : '' };
     this.workOrderDataService.editWorkOrder(orderModel)
       .subscribe({
         next: () => {

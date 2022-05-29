@@ -1,7 +1,4 @@
-export interface WorkOrdersCreateRequestModel {
-    lineUuid: String;
-    areaUuid: String;
-    deptUuid: String;
+export interface WorkOrdersCreateRequestModel {    
     assigneeUuid: String;
     machineUuid: String;
     description: String;

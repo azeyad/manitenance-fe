@@ -149,11 +149,8 @@ export class OrderPropertiesComponent implements OnInit {
   getOrderCreateRequestModel(): WorkOrdersCreateRequestModel {
     const model: WorkOrdersCreateRequestModel = {
       description: this.description,
-      lineUuid: this.currentLine,
       creationDate: this.orderDate ? moment(this.orderDate).format('YYYY-MM-DD') : '',
       machineUuid: this._currentMachine,
-      deptUuid: this._currentDept,
-      areaUuid: this._currentArea,
       orderStatus: this.currentStatus,
       assigneeUuid: this.currentAssignee
     }

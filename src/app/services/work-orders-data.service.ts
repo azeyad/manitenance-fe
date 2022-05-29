@@ -38,7 +38,7 @@ export class WorkOrdersDataService {
   }
 
   editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel) {
-    return this.httpClient.post('/api/v1/user/workorder/create', workorderModel);
+    return this.httpClient.post('/api/v1/user/workorder/update', workorderModel);
   }
 
   removeWorkOrder(orderUuid: String) {
