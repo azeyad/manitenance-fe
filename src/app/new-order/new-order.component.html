@@ -8,9 +8,9 @@
                     <app-order-properties></app-order-properties>
                 </mat-card-content>
                 <mat-card-actions fxLayoutAlign="flex-end">
-                    <button class="mat-raised-button" mat-button (click)="cancel()">Cancel</button>
+                    <button class="mat-raised-button mat-warn" mat-button (click)="cancel()"><mat-icon>cancel</mat-icon> Cancel</button>
                     <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="button"
-                        [disabled]="!canSubmit()" (click)="submit()">Create order</button>
+                        [disabled]="!canSubmit()" (click)="submit()"><mat-icon>beenhere</mat-icon>Save</button>
                     <button class="mat-raised-button" mat-button (click)="addNotes()">Add notes</button>
                     <button class="mat-raised-button" mat-button (click)="addFiles()">Add files</button>
                 </mat-card-actions>

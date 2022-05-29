@@ -128,9 +128,9 @@
           </div>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="flex-end">
-          <button class="mat-raised-button" mat-button (click)="clearFilters()">Clear</button>
+          <button class="mat-raised-button mat-warn" mat-button (click)="clearFilters()"><mat-icon>restart_alt</mat-icon>Clear</button>
           <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial
-            (click)="searchOrders()">Search</button>
+            (click)="searchOrders()"><mat-icon>search</mat-icon>Search</button>
         </mat-card-actions>
       </mat-card>
     </div>
