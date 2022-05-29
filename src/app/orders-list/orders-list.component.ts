@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { WorkOrderModel } from '../models/work-order-model';
-import { merge, Observable, ReplaySubject } from 'rxjs';
+import { filter, merge, Observable, ReplaySubject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
 import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-response-model';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-orders-list',
@@ -31,7 +33,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   @Output() pagingSortingChanged: EventEmitter<WorkOrderPagingSortingModel> = new EventEmitter();
   @Output() removeOrderRequest: EventEmitter<String> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -75,8 +77,17 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl(`/edit/${orderUuid}`);
   }
 
-  removeOrder(orderUuid: String): void {
-    this.removeOrderRequest.emit(orderUuid);
+  removeOrder(order: WorkOrderModel): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: `Are you sure you want to delete work order: ${order.code}?`
+      }
+    });
+
+    dialogRef.afterClosed().pipe(filter(result => result))
+      .subscribe(() => {
+        this.removeOrderRequest.emit(order.uuid);
+      });
   }
 }
 

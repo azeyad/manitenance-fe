@@ -33,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     OrdersListComponent,
     OrderFiltersComponent,
     OrderPropertiesComponent,
-    OrdersSearchComponent
+    OrdersSearchComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
