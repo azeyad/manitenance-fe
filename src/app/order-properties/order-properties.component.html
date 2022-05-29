@@ -3,10 +3,10 @@
         <div style="width: 50%;">
             <table>
                 <tr>
-                    <td>
+                    <td *ngIf="orderNumber">
                         W.O:
                     </td>
-                    <td>
+                    <td *ngIf="orderNumber">
                         <mat-label style="font-weight:bold;">{{orderNumber}}</mat-label>
                     </td>
                 </tr>
