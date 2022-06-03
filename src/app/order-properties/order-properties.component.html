@@ -1,7 +1,7 @@
 <form #orderForm="ngForm">
     <div style="display: flex; flex-direction:row">
         <div style="width: 50%;">
-            <table>                
+            <table>
                 <tr>
                     <td>
                         Date:
@@ -13,17 +13,7 @@
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
-
-                    </td>
-                    <td>
-                        Description:
-                    </td>
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <input class="form-control" matInput placeholder="Type description"
-                                [(ngModel)]="description" #descr="ngModel" name="description" required />
-                        </mat-form-field>
-                    </td>
+                    </td>                                        
                 </tr>
                 <tr>
                     <td>Status: </td>
@@ -109,5 +99,12 @@
                 </tr>
             </table>
         </div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+        <mat-label>Description:</mat-label>
+        <mat-form-field appearance="fill">            
+            <textarea rows="8" class="form-control" matInput placeholder="Type description"
+                [(ngModel)]="description" #descr="ngModel" name="description" required></textarea>
+        </mat-form-field>
     </div>
 </form>
