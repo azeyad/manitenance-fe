@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-orders-search',
   templateUrl: './orders-search.component.html',
-  styleUrls: ['./orders-search.component.css']
+  styleUrls: ['./orders-search.component.scss']
 })
 export class OrdersSearchComponent implements OnInit {
 

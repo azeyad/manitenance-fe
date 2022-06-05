@@ -1,138 +1,127 @@
-<div>  
-  <div class="container">
-    <div fxLayout="row" fxLayoutAlign="flex-start center" class="content">
-      <mat-card class="card">        
-        <mat-card-content>
-          <div style="display: flex; flex-direction:row">
-            <div style="width: 50%;">
-              <table>
-                <tr>
-                  <td>
-                    W.O:
-                  </td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <input matInput placeholder="Type W.O" [(ngModel)]="orderNumber" name="orderNumber" />
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Date:
-                  </td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <mat-date-range-input [rangePicker]="picker">
-                        <input matStartDate placeholder="from" [(ngModel)]="orderDateFrom">
-                        <input matEndDate placeholder="to" [(ngModel)]="orderDateTo">
-                      </mat-date-range-input>
-                      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-                  </td>
-                  <td>
-                    Description:
-                  </td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <input matInput placeholder="Type description" [(ngModel)]="description" name="description" />
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Status: </td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select status</mat-label>
-                      <mat-select [(value)]="currentStatus" name="status">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let status of statuses" [value]="status.key">
-                          {{status.value}}</mat-option>
+<mat-card class="card">
+  <mat-card-content>
+    <div class="modhyobitto-form-field">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>
+              W.O
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <input matInput placeholder="Type Order number" [(ngModel)]="orderNumber" name="orderNumber" />
+          </mat-form-field>
 
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                  <td>Responsible:</td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select assignee</mat-label>
-                      <mat-select [(value)]="currentAssignee" name="assignee">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    line:
-                  </td>
-                  <td>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select line</mat-label>
-                      <mat-select [(value)]="currentLine" name="line">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let line of lines" [value]="line.key">{{line.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Date
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="from" [(ngModel)]="orderDateFrom">
+              <input matEndDate placeholder="to" [(ngModel)]="orderDateTo">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
 
-                  <td *ngIf="currentLine">
-                    Area:
-                  </td>
-                  <td *ngIf="currentLine">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select area</mat-label>
-                      <mat-select [(value)]="currentArea" name="area">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                </tr>
-                <tr>
-                  <td *ngIf="currentArea">
-                    Department:
-                  </td>
-                  <td *ngIf="currentArea">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select department</mat-label>
-                      <mat-select [(value)]="currentDept" name="department">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Desription
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <input matInput placeholder="Type description" [(ngModel)]="description" name="description" />
+          </mat-form-field>
 
-                  <td *ngIf="currentDept">
-                    Equipment:
-                  </td>
-                  <td *ngIf="currentDept">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Select equipment</mat-label>
-                      <mat-select [(value)]="currentMachine" name="machine">
-                        <mat-option>None</mat-option>
-                        <mat-option *ngFor="let machine of machines" [value]="machine.key">
-                          {{machine.value}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                </tr>
-              </table>
-            </div>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Order status
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <mat-select [(value)]="currentStatus" name="status">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let status of statuses" [value]="status.key">
+                {{status.value}}</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Responsible
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <mat-select [(value)]="currentAssignee" name="assignee">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>
+              Line
+              <span aria-hidden="true" class="placeholder-required"> *</span>
+            </mat-label>
+            <mat-select [(value)]="currentLine" name="line">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let line of lines" [value]="line.key">{{line.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="currentLine">
+            <mat-form-field appearance="fill">
+              <mat-label>
+                Area
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+              </mat-label>
+              <mat-select [(value)]="currentArea" name="area">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-        </mat-card-content>
-        <mat-card-actions fxLayoutAlign="flex-end">
-          <button class="mat-raised-button mat-warn" mat-button (click)="clearFilters()"><mat-icon>restart_alt</mat-icon>Clear</button>
-          <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial
-            (click)="searchOrders()"><mat-icon>search</mat-icon>Search</button>
-        </mat-card-actions>
-      </mat-card>
+
+          <div *ngIf="currentArea">
+            <mat-form-field appearance="fill">
+              <mat-label>
+                Department
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+              </mat-label>
+              <mat-select [(value)]="currentDept" name="department">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="currentDept">
+            <mat-form-field appearance="fill">
+              <mat-label>
+                Equibment
+                <span aria-hidden="true" class="placeholder-required"> *</span>
+              </mat-label>
+              <mat-select [(value)]="currentMachine" name="machine">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let machine of machines" [value]="machine.key">
+                  {{machine.value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+  <mat-card-actions fxLayoutAlign="flex-end">
+    <button class="mat-raised-button mat-warn" mat-button (click)="clearFilters()">
+      <mat-icon>restart_alt</mat-icon>Clear
+    </button>
+    <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial (click)="searchOrders()">
+      <mat-icon>search</mat-icon>Search
+    </button>
+  </mat-card-actions>
+</mat-card>

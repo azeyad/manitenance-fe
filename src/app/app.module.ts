@@ -34,6 +34,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     OrderFiltersComponent,
     OrderPropertiesComponent,
     OrdersSearchComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,    
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatListModule,
     MatCardModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

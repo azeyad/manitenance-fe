@@ -8,7 +8,7 @@ import { OrderLookupDataService } from '../services/order-lookup-data.service';
 @Component({
   selector: 'app-order-properties',
   templateUrl: './order-properties.component.html',
-  styleUrls: ['./order-properties.component.css']
+  styleUrls: ['./order-properties.component.scss']
 })
 export class OrderPropertiesComponent implements OnInit {
 

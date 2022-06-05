@@ -1,110 +1,93 @@
 <form #orderForm="ngForm">
-    <div style="display: flex; flex-direction:row">
-        <div style="width: 50%;">
-            <table>
-                <tr>
-                    <td>
-                        Date:
-                    </td>
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="orderDate" required>
-                            <mat-hint>MM/DD/YYYY</mat-hint>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                    </td>                                        
-                </tr>
-                <tr>
-                    <td>Status: </td>
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select status</mat-label>
-                            <mat-select name="status" [(ngModel)]="currentStatus" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let status of statuses" [value]="status.key">
-                                    {{status.value}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
-                    <td>Responsible:</td>
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select assignee</mat-label>
-                            <mat-select [(ngModel)]="currentAssignee" name="assignee" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        line:
-                    </td>
-                    <td>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select line</mat-label>
-                            <mat-select [(ngModel)]="currentLine" name="line" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let line of lines" [value]="line.key">{{line.value}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
+    <div class="modhyobitto-form-field">
+        <div class="row">
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        Date
 
-                    <td *ngIf="currentLine">
-                        Area:
-                    </td>
-                    <td *ngIf="currentLine">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select area</mat-label>
-                            <mat-select [(ngModel)]="currentArea" name="area" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td *ngIf="currentArea">
-                        Department:
-                    </td>
-                    <td *ngIf="currentArea">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select department</mat-label>
-                            <mat-select [(ngModel)]="currentDept" name="department" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
+                    </mat-label>
+                    <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="orderDate" required>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
-                    <td *ngIf="currentDept">
-                        Equipment:
-                    </td>
-                    <td *ngIf="currentDept">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select equipment</mat-label>
-                            <mat-select [(ngModel)]="currentMachine" name="machine" required>
-                                <mat-option>None</mat-option>
-                                <mat-option *ngFor="let machine of machines" [value]="machine.key">
-                                    {{machine.value}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        Order status
+                    </mat-label>
+                    <mat-select name="status" [(ngModel)]="currentStatus" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let status of statuses" [value]="status.key">
+                            {{status.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        Responsible
+                    </mat-label>
+                    <mat-select [(ngModel)]="currentAssignee" name="assignee" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        Line
+                    </mat-label>
+                    <mat-select [(ngModel)]="currentLine" name="line" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let line of lines" [value]="line.key">{{line.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        Area
+                    </mat-label>
+                    <mat-select [(ngModel)]="currentArea" name="area" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" *ngIf="currentArea">
+                    <mat-label>
+                        Department
+                    </mat-label>
+                    <mat-select [(ngModel)]="currentDept" name="department" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" *ngIf="currentDept">
+                    <mat-label>
+                        Equibment
+                    </mat-label>
+                    <mat-select [(ngModel)]="currentMachine" name="machine" required>
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let machine of machines" [value]="machine.key">
+                            {{machine.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
         </div>
     </div>
-    <div style="display:flex;flex-direction:column">
-        <mat-label>Description:</mat-label>
-        <mat-form-field appearance="fill">            
-            <textarea rows="8" class="form-control" matInput placeholder="Type description"
-                [(ngModel)]="description" #descr="ngModel" name="description" required></textarea>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Description:</mat-label>
+            <textarea rows="8" class="form-control" matInput placeholder="Type description" [(ngModel)]="description"
+                #descr="ngModel" name="description" required></textarea>
         </mat-form-field>
     </div>
 </form>

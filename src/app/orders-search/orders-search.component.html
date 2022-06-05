@@ -1,16 +1,14 @@
 <mat-card class="card">
-    <mat-card-title style="color: blue;">
-        <mat-icon>travel_explore</mat-icon>Search orders
-        <div fxLayoutAlign="flex-end">
-            <button mat-raised-button color="primary">                
-                <a mat-button routerLink="/new"><mat-icon class="icon">add_circle_outline</mat-icon>New order</a>
-            </button>
-        </div>
+    <mat-card-title class="mat-card-title">
+        <mat-icon>travel_explore</mat-icon>Search orders        
     </mat-card-title>
     <mat-card-content>
-        <app-order-filters (filtersChanged)='onFiltersChanged($event)'></app-order-filters>
-        <br />
-        <app-orders-list [isLoading]="isLoading" (pagingSortingChanged)='onPagingSortingChanged($event)'
-            (removeOrderRequest)="onRemoveWorkOrder($event)"></app-orders-list>
+        <div class="row">
+            <app-order-filters (filtersChanged)='onFiltersChanged($event)'></app-order-filters>
+        </div>
+        <div class="row">
+            <app-orders-list [isLoading]="isLoading" (pagingSortingChanged)='onPagingSortingChanged($event)'
+                (removeOrderRequest)="onRemoveWorkOrder($event)"></app-orders-list>
+        </div>
     </mat-card-content>
 </mat-card>

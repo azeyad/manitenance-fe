@@ -7,7 +7,7 @@ import { OrderLookupDataService } from '../services/order-lookup-data.service';
 @Component({
   selector: 'app-order-filters',
   templateUrl: './order-filters.component.html',
-  styleUrls: ['./order-filters.component.css']
+  styleUrls: ['./order-filters.component.scss']
 })
 export class OrderFiltersComponent implements OnInit {
 
