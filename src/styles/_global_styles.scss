@@ -27,7 +27,7 @@
 
     .login-page__banner {
         color: white;
-        background-color: map-get($modhyobitto-colors, primary);
+        background-color: map-get($custom-colors, primary);
 
         @include media-breakpoint-down(sm) {
             height: 180px;
@@ -66,7 +66,7 @@
         }
 
         .login-disclaimer {
-            color: map-get($modhyobitto-colors, primary-dark);
+            color: map-get($custom-colors, primary-dark);
             font-size: 0.9rem;
             margin-bottom: 2rem;
             text-align: justify;
@@ -117,7 +117,7 @@
 
     .primary-header {
         color: white;
-        background-color: map-get($modhyobitto-colors, primary-dark);
+        background-color: map-get($custom-colors, primary-dark);
         height: 70px;
 
         .brand-logo {
@@ -131,7 +131,7 @@
     }
 
     .primary-navigation {
-        background-color: map-get($modhyobitto-colors, primary-light);
+        background-color: map-get($custom-colors, primary-light);
 
         .mat-tab-nav-bar,
         .mat-tab-header {
@@ -145,7 +145,7 @@
         }
 
         .mat-tab-link {
-            color: map-get($modhyobitto-colors, default-text);
+            color: map-get($custom-colors, default-text);
             text-decoration: none;
             text-transform: uppercase;
 
@@ -163,13 +163,13 @@
 
 %mat-action-button {
     background: transparent;
-    color: map-get($modhyobitto-colors, primary);
+    color: map-get($custom-colors, primary);
     font-family: 'RobotoBold', sans-serif;
     height: 35px;
 
     &:hover,
     &:focus {
-        background: map-get($modhyobitto-colors, subtle-bg);
+        background: map-get($custom-colors, subtle-bg);
     }
 }
 
@@ -227,7 +227,7 @@
     border-radius: 0;
 
     .mat-simple-snackbar-action {
-        color: map-get($modhyobitto-colors, primary-light);
+        color: map-get($custom-colors, primary-light);
 
         button {
             font-family: 'RobotoBold', sans-serif;
@@ -246,8 +246,8 @@
     max-width: 500px;
 
     .mat-dialog-title {
-        border-bottom: 1px solid map-get($modhyobitto-colors, divider);
-        color: map-get($modhyobitto-colors, primary-dark);
+        border-bottom: 1px solid map-get($custom-colors, divider);
+        color: map-get($custom-colors, primary-dark);
         font-family: 'Roboto', sans-serif;
         margin-bottom: 1rem;
         padding-bottom: 0.5rem;
@@ -269,8 +269,8 @@
 // Card
 mat-card-title {
     @extend .mat-card-title;
-    border-bottom: 1px solid map-get($modhyobitto-colors, divider);
-    color: map-get($modhyobitto-colors, primary-dark);
+    border-bottom: 1px solid map-get($custom-colors, divider);
+    color: map-get($custom-colors, primary-dark);
     font-family: 'Roboto', sans-serif;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
@@ -285,7 +285,7 @@ mat-card-title {
 }
 
 .primary-footer {
-    background-color: map-get($modhyobitto-colors, primary-dark);
+    background-color: map-get($custom-colors, primary-dark);
     color: white;
     font-size: 0.95rem;    
 
@@ -311,7 +311,7 @@ mat-card-title {
                         color: white;
 
                         &:hover {
-                            color: map-get($modhyobitto-colors, primary-light);
+                            color: map-get($custom-colors, primary-light);
                         }
                     }
                 }
@@ -327,7 +327,7 @@ mat-card-title {
         
 
         .primary-footer__legal-disclaimer {
-            border-top: 1px solid map-get($modhyobitto-colors, primary-light);
+            border-top: 1px solid map-get($custom-colors, primary-light);
 
             p {
                 margin-top: 30px;
@@ -369,20 +369,20 @@ mat-card-title {
 
         100%,
         0% {
-            stroke: map-get($modhyobitto-colors, primary);
+            stroke: map-get($custom-colors, primary);
         }
 
         40% {
-            stroke: map-get($modhyobitto-colors, primary-dark);
+            stroke: map-get($custom-colors, primary-dark);
         }
 
         66% {
-            stroke: map-get($modhyobitto-colors, primary-light);
+            stroke: map-get($custom-colors, primary-light);
         }
 
         80%,
         90% {
-            stroke: map-get($modhyobitto-colors, primary);
+            stroke: map-get($custom-colors, primary);
         }
     }
 
@@ -400,7 +400,7 @@ mat-card-title {
     padding-top: 2rem;
 
     .side-bar__heading {
-        color: map-get($modhyobitto-colors, primary-dark);
+        color: map-get($custom-colors, primary-dark);
         font-size: 2rem;
         margin-bottom: 1rem;
 
@@ -418,15 +418,15 @@ mat-card-title {
             li {
                 padding-top: 8px;
                 padding-bottom: 8px;
-                border-top: solid 1px map-get($modhyobitto-colors, divider);
+                border-top: solid 1px map-get($custom-colors, divider);
 
                 &:last-of-type {
-                    border-bottom: solid 1px map-get($modhyobitto-colors, divider);
+                    border-bottom: solid 1px map-get($custom-colors, divider);
                 }
             }
 
             .side-bar__navigation-links--active {
-                color: map-get($modhyobitto-colors, primary-dark);
+                color: map-get($custom-colors, primary-dark);
                 cursor: default;
                 font-family: 'Roboto', sans-serif;
 
@@ -439,7 +439,7 @@ mat-card-title {
 
     .side-bar__menu {
         @extend %mat-action-button;
-        color: map-get($modhyobitto-colors, primary);
+        color: map-get($custom-colors, primary);
 
         span {
             font-size: 2rem;
@@ -448,7 +448,7 @@ mat-card-title {
         &:hover,
         &:focus {
             background: transparent;
-            color: map-get($modhyobitto-colors, primary-dark);
+            color: map-get($custom-colors, primary-dark);
         }
 
         @include media-breakpoint-up(md) {
@@ -463,13 +463,13 @@ mat-card-title {
     }
 
     button {
-        color: map-get($modhyobitto-colors, primary);
+        color: map-get($custom-colors, primary);
         font-family: 'Roboto', sans-serif;
         text-transform: none;
 
         &.side-bar__menu-item--active {
-            background: map-get($modhyobitto-colors, subtle-bg);
-            color: map-get($modhyobitto-colors, primary-dark);
+            background: map-get($custom-colors, subtle-bg);
+            color: map-get($custom-colors, primary-dark);
             font-family: 'RobotoBold', sans-serif;
         }
     }
@@ -489,7 +489,7 @@ mat-card-title {
         margin-bottom: 1.5rem;
 
         .page-sub-section__header {
-            color: map-get($modhyobitto-colors, primary-dark);
+            color: map-get($custom-colors, primary-dark);
             font-family: 'Roboto', sans-serif;
             margin-bottom: 0.5rem;
 
@@ -558,7 +558,7 @@ mat-card-title {
 
         &.mat-form-field-appearance-fill {
             .mat-form-field-flex {
-                background-color: map-get($modhyobitto-colors, subtle-bg);
+                background-color: map-get($custom-colors, subtle-bg);
                 border-radius: 0;
                 border: 1px solid transparent;
 
@@ -583,12 +583,12 @@ mat-card-title {
 
         &.mat-focused {
             .mat-form-field-flex {
-                border: 1px solid map-get($modhyobitto-colors, primary);
+                border: 1px solid map-get($custom-colors, primary);
             }
 
             &.mat-form-field-invalid {
                 .mat-form-field-flex {
-                    border: 1px solid map-get($modhyobitto-colors, notification);
+                    border: 1px solid map-get($custom-colors, notification);
                 }
             }
         }
@@ -596,7 +596,7 @@ mat-card-title {
         &,
         &.mat-focused {
             .placeholder-required {
-                color: map-get($modhyobitto-colors, notification);
+                color: map-get($custom-colors, notification);
             }
         }
     }
@@ -618,7 +618,7 @@ mat-card-title {
 .modhyobitto-checkbox,
 .modhyobitto-radio {
     .placeholder-required {
-        color: map-get($modhyobitto-colors, notification);
+        color: map-get($custom-colors, notification);
     }
 
     .mat-error {
@@ -633,8 +633,8 @@ mat-card-title {
 }
 
 .modhyobitto-file-uploader {
-    background-color: map-get($modhyobitto-colors, subtle-bg);
-    border: 2px dashed map-get($modhyobitto-colors, primary);
+    background-color: map-get($custom-colors, subtle-bg);
+    border: 2px dashed map-get($custom-colors, primary);
     padding: 3rem;
 
     @include media-breakpoint-down(lg) {
@@ -671,7 +671,7 @@ mat-card-title {
                     justify-content: space-between;
 
                     .selected-file__name {
-                        color: map-get($modhyobitto-colors, primary-dark);
+                        color: map-get($custom-colors, primary-dark);
                         overflow: hidden;
                         padding: 0 1.5rem;
                         text-overflow: ellipsis;
@@ -693,7 +693,7 @@ mat-card-title {
 
                 &.mat-expanded {
                     .selected-file__header {
-                        border-bottom: solid 1px map-get($modhyobitto-colors, divider);
+                        border-bottom: solid 1px map-get($custom-colors, divider);
                     }
                 }
 
@@ -707,7 +707,7 @@ mat-card-title {
                 padding-top: 1rem;
 
                 .selected-file__upload--error {
-                    color: map-get($modhyobitto-colors, notification);
+                    color: map-get($custom-colors, notification);
                 }
             }
 
@@ -716,7 +716,7 @@ mat-card-title {
     }
 
     .file-uploader__instructions {
-        color: map-get($modhyobitto-colors, primary);
+        color: map-get($custom-colors, primary);
         margin-bottom: 3rem;
         padding: 0 1rem;
         text-align: center;
@@ -740,7 +740,7 @@ mat-card-title {
             &.all_file__cancel {
                 display: flex;
                 align-items: center;
-                border-left: 2px solid map-get($modhyobitto-colors, subtle-bg);
+                border-left: 2px solid map-get($custom-colors, subtle-bg);
                 min-width: 0;
                 padding: 0 15px;
             }
@@ -753,13 +753,13 @@ mat-card-title {
 }
 
 .custom-mat-table {
-    border: solid 1px map-get($modhyobitto-colors, primary);
+    border: solid 1px map-get($custom-colors, primary);
 
     .custom-mat-table__grid {
         width: 100%;
 
         .mat-header-row {
-            background-color: map-get($modhyobitto-colors, primary);
+            background-color: map-get($custom-colors, primary);
 
             .mat-header-cell {
                 color: white;
@@ -780,13 +780,13 @@ mat-card-title {
                 }
 
                 100% {
-                    background-color: map-get($modhyobitto-colors, primary-light);
+                    background-color: map-get($custom-colors, primary-light);
                 }
             }
         }
 
         .mat-cell {
-            color: map-get($modhyobitto-colors, default-text);
+            color: map-get($custom-colors, default-text);
 
             &.row-action-column {
                 padding: 0 8px 0 1.5rem;
@@ -817,7 +817,7 @@ mat-card-title {
     .custom-mat-table__action-button {
         background: transparent;
         border-radius: 50%;
-        color: map-get($modhyobitto-colors, primary);
+        color: map-get($custom-colors, primary);
         height: 40px;
         padding: 0;
         width: 40px;
@@ -826,7 +826,7 @@ mat-card-title {
         align-items: center;
 
         &:focus {
-            background: map-get($modhyobitto-colors, disabled-bg);
+            background: map-get($custom-colors, disabled-bg);
         }
 
         &:hover {
@@ -835,7 +835,7 @@ mat-card-title {
 
         &:focus,
         &:hover {
-            color: map-get($modhyobitto-colors, primary);
+            color: map-get($custom-colors, primary);
         }
     }
 }
@@ -846,13 +846,13 @@ mat-card-title {
     .mat-paginator-page-size-label,
     .mat-select-trigger,
     .mat-paginator-range-label {
-        color: map-get($modhyobitto-colors, default-text);
+        color: map-get($custom-colors, default-text);
         font-size: 14px;
     }
 
     .mat-paginator-range-actions {
         button {
-            color: map-get($modhyobitto-colors, primary);
+            color: map-get($custom-colors, primary);
         }
     }
 }
@@ -864,8 +864,8 @@ mat-card-title {
 
             .table-update__header {
                 h2 {
-                    border-bottom: 1px solid map-get($modhyobitto-colors, divider);
-                    color: map-get($modhyobitto-colors, primary-dark);
+                    border-bottom: 1px solid map-get($custom-colors, divider);
+                    color: map-get($custom-colors, primary-dark);
                     font-family: 'Roboto', sans-serif;
                     margin-bottom: 1rem;
                     padding-bottom: 0.5rem;

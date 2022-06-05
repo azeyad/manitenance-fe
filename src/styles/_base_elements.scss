@@ -10,7 +10,7 @@
         width: 10px;
     }
     &::-webkit-scrollbar-thumb{
-        background: map-get($modhyobitto-colors, primary);
+        background: map-get($custom-colors, primary);
     }
 }
 
@@ -21,7 +21,7 @@
 html,body{
     font-family: 'RobotoLight', sans-serif;
     font-size: 16px;
-    color: map-get($modhyobitto-colors, default-text);
+    color: map-get($custom-colors, default-text);
 }
 
 //headings
@@ -55,10 +55,10 @@ h1, h2, h3, h4, h5, h6{
 }
 
 a {
-    color: map-get($modhyobitto-colors, primary);
+    color: map-get($custom-colors, primary);
     text-decoration: none;
     &:hover {
-        color: map-get($modhyobitto-colors, primary-dark);
+        color: map-get($custom-colors, primary-dark);
         text-decoration: underline;
     }
 }
