@@ -1,9 +1,8 @@
 <div class="row">
     <mat-card class="card">
-        <mat-card-title class="mat-card-title">
-            <mat-icon>drive_file_rename_outline</mat-icon> Edit order
-        </mat-card-title>
-        <mat-card-subtitle class="mat-card-title">W.O: {{orderNumber}}</mat-card-subtitle>
+        <mat-card-title>
+            <mat-icon>drive_file_rename_outline</mat-icon> change order #{{orderNumber}}
+        </mat-card-title>        
         <mat-card-content>
             <app-order-properties [currentArea]="currentArea" [currentAssignee]="currentAssignee"
                 [currentDept]="currentDept" [currentLine]="currentLine" [currentMachine]="currentMachine"

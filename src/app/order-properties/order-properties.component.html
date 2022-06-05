@@ -1,5 +1,5 @@
 <form #orderForm="ngForm">
-    <div class="modhyobitto-form-field">
+    <div class="custom-mat-form-field">
         <div class="row">
             <div class="column">
                 <mat-form-field appearance="fill">
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="row">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" class="custom-mat-form-field">
             <mat-label>Description:</mat-label>
             <textarea rows="8" class="form-control" matInput placeholder="Type description" [(ngModel)]="description"
                 #descr="ngModel" name="description" required></textarea>

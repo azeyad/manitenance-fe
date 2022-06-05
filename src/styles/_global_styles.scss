@@ -236,13 +236,13 @@
 }
 
 // Dialog
-.modhyobitto-dialog-container {
+.custom-mat-dialog-container {
     .mat-dialog-container {
         border-radius: 0;
     }
 }
 
-.modhyobitto-dialog {
+.custom-mat-dialog {
     max-width: 500px;
 
     .mat-dialog-title {
@@ -267,7 +267,7 @@
 }
 
 // Card
-.mat-card-title {
+mat-card-title {
     @extend .mat-card-title;
     border-bottom: 1px solid map-get($modhyobitto-colors, divider);
     color: map-get($modhyobitto-colors, primary-dark);
@@ -552,7 +552,7 @@
 
 //form field
 
-.modhyobitto-form-field {
+.custom-mat-form-field {
     mat-form-field {
         width: 100%;
 
@@ -752,10 +752,10 @@
     }
 }
 
-.modhyobitto-table {
+.custom-mat-table {
     border: solid 1px map-get($modhyobitto-colors, primary);
 
-    .modhyobitto-table__grid {
+    .custom-mat-table__grid {
         width: 100%;
 
         .mat-header-row {
@@ -808,13 +808,13 @@
         }
     }
 
-    .modhyobitto-table__add {
+    .custom-mat-table__add {
         display: flex;
         justify-content: flex-end;
         padding: 10px 8px 0;
     }
 
-    .modhyobitto-table__action-button {
+    .custom-mat-table__action-button {
         background: transparent;
         border-radius: 50%;
         color: map-get($modhyobitto-colors, primary);
@@ -857,7 +857,7 @@
     }
 }
 
-.modhyobitto-table-drawer-container {
+.custom-mat-table-drawer-container {
     mat-drawer {
         .table-update {
             padding: 1rem 2rem;
