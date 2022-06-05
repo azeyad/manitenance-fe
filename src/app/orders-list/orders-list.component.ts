@@ -33,7 +33,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   @Output() pagingSortingChanged: EventEmitter<WorkOrderPagingSortingModel> = new EventEmitter();
   @Output() removeOrderRequest: EventEmitter<String> = new EventEmitter();
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 

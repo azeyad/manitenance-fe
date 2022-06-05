@@ -635,7 +635,7 @@ mat-card-title {
 .modhyobitto-file-uploader {
     background-color: map-get($custom-colors, subtle-bg);
     border: 2px dashed map-get($custom-colors, primary);
-    padding: 3rem;
+    padding: 3rem;    
 
     @include media-breakpoint-down(lg) {
         padding: 2rem;
@@ -647,6 +647,8 @@ mat-card-title {
 
     .files-for-upload {
         margin-bottom: 3rem;
+        max-height: 300px;
+        overflow-y: auto;
 
         .selected-file {
             border-radius: 0;

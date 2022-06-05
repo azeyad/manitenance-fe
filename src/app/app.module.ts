@@ -15,7 +15,7 @@ import { MatCommonModule, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -36,7 +36,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FilesUploadComponent } from './files-upload/files-upload.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -48,9 +51,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     OrderFiltersComponent,
     OrderPropertiesComponent,
     OrdersSearchComponent,
-    ConfirmationDialogComponent,    
+    ConfirmationDialogComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FilesUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

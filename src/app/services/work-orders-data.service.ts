@@ -33,15 +33,19 @@ export class WorkOrdersDataService {
     );
   }
 
-  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel) {
-    return this.httpClient.post('/api/v1/user/workorder/create', workorderModel);
+  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel): Observable<WorkOrderModel> {
+    return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/create', workorderModel);
   }
 
-  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel) {
-    return this.httpClient.post('/api/v1/user/workorder/update', workorderModel);
+  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel): Observable<WorkOrderModel> {
+    return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/update', workorderModel);
   }
 
   removeWorkOrder(orderUuid: String) {
     return this.httpClient.delete(`/api/v1/user/workorder/delete?orderUuid=${orderUuid}`);
+  }
+
+  uploadFiles(orderUuid: String, files: FormData) {
+    return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, files);
   }
 }
