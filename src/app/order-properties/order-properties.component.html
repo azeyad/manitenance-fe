@@ -46,34 +46,34 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                
+
                 <mat-form-field appearance="fill">
                     <mat-label>
                         Area
                     </mat-label>
-                    <mat-select [(ngModel)]="currentArea" name="area" required>
+                    <mat-select [(ngModel)]="currentArea" name="area" required [disabled]="!currentLine">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" *ngIf="currentArea">
+                <mat-form-field appearance="fill">
                     <mat-label>
                         Department
                     </mat-label>
-                    <mat-select [(ngModel)]="currentDept" name="department" required>
+                    <mat-select [(ngModel)]="currentDept" name="department" required [disabled]="!currentArea">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" *ngIf="currentDept">
+                <mat-form-field appearance="fill">
                     <mat-label>
                         Equibment
                     </mat-label>
-                    <mat-select [(ngModel)]="currentMachine" name="machine" required>
+                    <mat-select [(ngModel)]="currentMachine" name="machine" required [disabled]="!currentDept">
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let machine of machines" [value]="machine.key">
                             {{machine.value}}</mat-option>
@@ -87,7 +87,7 @@
         <mat-form-field appearance="fill" class="custom-mat-form-field">
             <mat-label>Description:</mat-label>
             <textarea rows="8" class="form-control" matInput placeholder="Type description" [(ngModel)]="description"
-                #descr="ngModel" name="description" required></textarea>
+                #descr="ngModel" name="description"></textarea>
         </mat-form-field>
     </div>
 </form>

@@ -5,16 +5,14 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>
-              W.O
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              W.O              
             </mat-label>
             <input matInput placeholder="Type Order number" [(ngModel)]="orderNumber" name="orderNumber" />
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>
-              Date
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              Date              
             </mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input matStartDate placeholder="from" [(ngModel)]="orderDateFrom">
@@ -27,16 +25,14 @@
 
           <mat-form-field appearance="fill">
             <mat-label>
-              Desription
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              Desription              
             </mat-label>
             <input matInput placeholder="Type description" [(ngModel)]="description" name="description" />
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>
-              Order status
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              Order status              
             </mat-label>
             <mat-select [(value)]="currentStatus" name="status">
               <mat-option>None</mat-option>
@@ -48,8 +44,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>
-              Responsible
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              Responsible              
             </mat-label>
             <mat-select [(value)]="currentAssignee" name="assignee">
               <mat-option>None</mat-option>
@@ -61,8 +56,7 @@
         <div class="column">
           <mat-form-field appearance="fill" style="width: 100%;">
             <mat-label>
-              Line
-              <span aria-hidden="true" class="placeholder-required"> *</span>
+              Line              
             </mat-label>
             <mat-select [(value)]="currentLine" name="line">
               <mat-option>None</mat-option>
@@ -71,47 +65,42 @@
             </mat-select>
           </mat-form-field>
 
-          <div *ngIf="currentLine">
-            <mat-form-field appearance="fill">
-              <mat-label>
-                Area
-                <span aria-hidden="true" class="placeholder-required"> *</span>
-              </mat-label>
-              <mat-select [(value)]="currentArea" name="area">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Area              
+            </mat-label>
+            <mat-select [(value)]="currentArea" name="area" [disabled]="!currentLine">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let area of areas" [value]="area.key">{{area.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-          <div *ngIf="currentArea">
-            <mat-form-field appearance="fill">
-              <mat-label>
-                Department
-                <span aria-hidden="true" class="placeholder-required"> *</span>
-              </mat-label>
-              <mat-select [(value)]="currentDept" name="department">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
 
-          <div *ngIf="currentDept">
-            <mat-form-field appearance="fill">
-              <mat-label>
-                Equibment
-                <span aria-hidden="true" class="placeholder-required"> *</span>
-              </mat-label>
-              <mat-select [(value)]="currentMachine" name="machine">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let machine of machines" [value]="machine.key">
-                  {{machine.value}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Department              
+            </mat-label>
+            <mat-select [(value)]="currentDept" name="department" [disabled]="!currentArea">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let dept of depts" [value]="dept.key">{{dept.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="fill">
+            <mat-label>
+              Equibment              
+            </mat-label>
+            <mat-select [(value)]="currentMachine" name="machine" [disabled]="!currentDept">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let machine of machines" [value]="machine.key">
+                {{machine.value}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
         </div>
       </div>
     </div>
