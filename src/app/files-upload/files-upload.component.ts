@@ -123,10 +123,6 @@ export class FilesUploadComponent implements OnInit {
     return this.selectedFiles.some(file => !file.isUploadInProgress && file.uploadResult != 'success')
   }
 
-  openNotesFiles() {
-
-  }
-
   isUploadInProgress(): boolean {
     return this.selectedFiles.some(p => p.isUploadInProgress);
   }
