@@ -69,50 +69,55 @@ export class FilesUploadComponent implements OnInit {
   }
 
   uploadFile(index: number) {
+    if (this.selectedFiles[index].uploadResult === "success") return;
     const formData = new FormData();
     formData.append('files', this.selectedFiles[index].file);
     this.selectedFiles[index].isUploadInProgress = true;
     this.selectedFiles[index].uploadResult = "";
-    this.ordersDataService.uploadFiles(this.workOrderUuid, formData).pipe(
-      tap(() => {
-        this.selectedFiles[index].isUploadInProgress = false;
-        this.selectedFiles[index].uploadResult = "success";
-      }),
-      switchMap(() => timer(2000))
-    ).subscribe({
-      next: () => this.selectedFiles.splice(index, 1),
-      error: () => {
-        this.selectedFiles[index].isUploadInProgress = false;
-        this.selectedFiles[index].uploadResult = "Upload failed.";
-      }
+    this.ordersDataService.uploadFiles(this.workOrderUuid, formData)
+      .subscribe({
+        next: () => {
+          this.selectedFiles[index].isUploadInProgress = false;
+          this.selectedFiles[index].uploadResult = "success";
+          this.showSuccessUploadSnackBar();
+        },
+        error: () => {
+          this.selectedFiles[index].isUploadInProgress = false;
+          this.selectedFiles[index].uploadResult = "Upload failed.";
+        }
+      });
+  }
+
+  private showSuccessUploadSnackBar() {
+    this.snackBar.open("Files uploaded successfully.", "Success!", {
+      duration: 2000
     });
   }
 
   uploadAll() {
     const formData = new FormData();
-    this.selectedFiles.forEach(p => {
-      formData.append('files', p.file);
-      p.isUploadInProgress = true;
-      p.uploadResult = "";
-    });
-    this.ordersDataService.uploadFiles(this.workOrderUuid, formData).pipe(
-      tap(() => {
-        this.selectedFiles.forEach(p => {
-          p.isUploadInProgress = false;
-          p.uploadResult = "success";
-        });
-      }),
-      switchMap(() => timer(2000))
-    ).subscribe({
-      next: () => {
-        this.selectedFiles = [];
-      }, error: () => {
-        this.selectedFiles.forEach(p => {
-          p.isUploadInProgress = false;
-          p.uploadResult = "Upload failed.";
-        });
-      }
-    });
+    this.selectedFiles
+      .filter(p => p.uploadResult !== "success")
+      .forEach(p => {
+        formData.append('files', p.file);
+        p.isUploadInProgress = true;
+        p.uploadResult = "";
+      });
+    this.ordersDataService.uploadFiles(this.workOrderUuid, formData)
+      .subscribe({
+        next: () => {
+          this.selectedFiles.forEach(p => {
+            p.isUploadInProgress = false;
+            p.uploadResult = "success";
+            this.showSuccessUploadSnackBar();
+          });
+        }, error: () => {
+          this.selectedFiles.forEach(p => {
+            p.isUploadInProgress = false;
+            p.uploadResult = "Upload failed.";
+          });
+        }
+      });
   }
 
   isAnyFileNotUploaded(): boolean {
