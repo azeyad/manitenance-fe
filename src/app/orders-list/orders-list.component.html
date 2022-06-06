@@ -14,9 +14,13 @@
                                 <mat-icon>edit</mat-icon>
                                 <span>Edit</span>
                             </button>
+                            <button mat-menu-item (click)="attachFiles(order.uuid)">
+                                <mat-icon>upload</mat-icon>
+                                <span>Attach files</span>
+                            </button>
                             <button mat-menu-item>
                                 <mat-icon>folder</mat-icon>
-                                <span>Open order folder</span>
+                                <span>Copy directroy path</span>
                             </button>
                             <button mat-menu-item>
                                 <mat-icon>check_circle</mat-icon>

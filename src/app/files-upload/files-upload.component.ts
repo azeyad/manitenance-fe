@@ -12,7 +12,7 @@ import { WorkOrdersDataService } from '../services/work-orders-data.service';
 })
 export class FilesUploadComponent implements OnInit {
 
-  acceptedMIMETypes = "application/pdf, application/jpeg, application/png";
+  acceptedMIMETypes = "application/pdf, image/jpg, image/jpeg, image/png";
   workOrderUuid: String;
   selectedFiles: WorkOrderAttachmentModel[] = [];
 

@@ -9,6 +9,7 @@ import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-resp
 import { Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FilesUploadComponent } from '../files-upload/files-upload.component';
 
 @Component({
   selector: 'app-orders-list',
@@ -88,6 +89,14 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         this.removeOrderRequest.emit(order.uuid);
       });
+  }
+
+  attachFiles(orderUuid: String): void {
+    this.dialog.open(FilesUploadComponent, {
+      data: {
+        orderUuid: orderUuid
+      }
+    });
   }
 }
 

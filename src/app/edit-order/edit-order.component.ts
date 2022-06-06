@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilesUploadComponent } from '../files-upload/files-upload.component';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { OrderPropertiesComponent } from '../order-properties/order-properties.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
@@ -25,7 +27,7 @@ export class EditOrderComponent implements OnInit {
   orderNumber: String;
   orderDate: Date;
 
-  constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -80,6 +82,14 @@ export class EditOrderComponent implements OnInit {
           });
         }
       })
+  }
+
+  uploadFiles(): void {
+    this.dialog.open(FilesUploadComponent, {
+      data: {
+        orderUuid: this.orderUuid
+      }
+    });
   }
 
   releaseOrder(): void {
