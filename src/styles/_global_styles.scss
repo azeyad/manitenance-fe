@@ -18,10 +18,6 @@
     font-family: 'RobotoMono', sans-serif;
 }
 
-.modhyobitto-icon {
-    font-size: 5rem;
-}
-
 .login-page {
     height: 100vh;
 
@@ -223,7 +219,7 @@
 }
 
 // Snack bar
-.modhyobitto-snackbar.mat-snack-bar-container {
+mat-snack-bar-container {
     border-radius: 0;
 
     .mat-simple-snackbar-action {
@@ -287,7 +283,7 @@ mat-card-title {
 .primary-footer {
     background-color: map-get($custom-colors, primary-dark);
     color: white;
-    font-size: 0.95rem;    
+    font-size: 0.95rem;
 
     .primary-footer__sitemap {
         .section-link-container {
@@ -324,7 +320,7 @@ mat-card-title {
     }
 
     .primary-footer__legal {
-        
+
 
         .primary-footer__legal-disclaimer {
             border-top: 1px solid map-get($custom-colors, primary-light);
@@ -602,21 +598,21 @@ mat-card-title {
     }
 }
 
-.modhyobitto-checkbox {
+.checkbox {
     ul {
         list-style-type: none;
         margin-bottom: 0.5rem;
     }
 }
 
-.modhyobitto-radio {
+.radio {
     .mat-radio-group {
         margin-bottom: 0.5rem;
     }
 }
 
-.modhyobitto-checkbox,
-.modhyobitto-radio {
+.checkbox,
+.radio {
     .placeholder-required {
         color: map-get($custom-colors, notification);
     }
@@ -632,10 +628,10 @@ mat-card-title {
     }
 }
 
-.modhyobitto-file-uploader {
+.file-uploader {
     background-color: map-get($custom-colors, subtle-bg);
     border: 2px dashed map-get($custom-colors, primary);
-    padding: 3rem;    
+    padding: 3rem;
 
     @include media-breakpoint-down(lg) {
         padding: 2rem;

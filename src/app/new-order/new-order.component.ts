@@ -27,14 +27,6 @@ export class NewOrderComponent implements OnInit {
     this.router.navigateByUrl('/search');
   }
 
-  addNotes(): void {
-
-  }
-
-  addFiles(): void {
-
-  }
-
   canSubmit(): boolean {
     return this.orderPropertiesComponent && this.orderPropertiesComponent.isValid();
   }
