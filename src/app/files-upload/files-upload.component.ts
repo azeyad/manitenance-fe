@@ -1,8 +1,7 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { switchMap, tap, timer } from 'rxjs';
 import { WorkOrderAttachmentModel } from '../models/work-order-attachment.model';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 
@@ -109,8 +108,8 @@ export class FilesUploadComponent implements OnInit {
           this.selectedFiles.forEach(p => {
             p.isUploadInProgress = false;
             p.uploadResult = "success";
-            this.showSuccessUploadSnackBar();
           });
+          this.showSuccessUploadSnackBar();
         }, error: () => {
           this.selectedFiles.forEach(p => {
             p.isUploadInProgress = false;
