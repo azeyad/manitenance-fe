@@ -14,15 +14,14 @@
                         <button matRipple class="selected_file__upload primary-button" matTooltip="Upload"
                             matTooltipPosition="left" aria-label="Upload File" (click)="uploadFile(i)"
                             [disabled]="selected_file.isUploadInProgress || selected_file.uploadResult=='success'">
-                            <span *ngIf="selected_file.uploadResult!='success'" aria-hidden="true"
-                                class="material-icons">file_upload</span>
-                            <span *ngIf="selected_file.uploadResult=='success'" aria-hidden="true"
-                                class="material-icons">check</span>
+                            <mat-icon *ngIf="selected_file.uploadResult!='success'" aria-hidden="true">file_upload
+                            </mat-icon>
+                            <mat-icon *ngIf="selected_file.uploadResult=='success'">check</mat-icon>
                         </button>
                         <button matRipple class="selected_file__cancel secondary-button" matTooltip="Cancel"
                             [disabled]="isUploadInProgress() || selected_file.uploadResult=='success'"
                             matTooltipPosition="right" aria-label="Cancel File" (click)="cancelFile(i)">
-                            <span aria-hidden="true" class="material-icons">clear</span>
+                            <mat-icon>clear</mat-icon>
                         </button>
                     </div>
                 </div>
@@ -48,8 +47,8 @@
         <ng-container *ngIf="selectedFiles.length>1">
             <button matRipple class="all_file__upload primary-button" matTooltip="Confirm" matTooltipPosition="above"
                 aria-label="Attach All Files" (click)="uploadAll()" [disabled]="!isAnyFileNotUploaded()">
-                <span aria-hidden="true" class="material-icons">file_upload</span>
+                <mat-icon>file_upload</mat-icon>
             </button>
-        </ng-container>        
+        </ng-container>
     </div>
 </div>
