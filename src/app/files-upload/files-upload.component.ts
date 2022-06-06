@@ -12,7 +12,6 @@ import { WorkOrdersDataService } from '../services/work-orders-data.service';
 })
 export class FilesUploadComponent implements OnInit {
 
-  acceptedMIMETypes = "application/pdf, image/jpg, image/jpeg, image/png";
   workOrderUuid: String;
   selectedFiles: WorkOrderAttachmentModel[] = [];
 
@@ -50,7 +49,6 @@ export class FilesUploadComponent implements OnInit {
   selectFiles(filesList: any) {
     const filesArray = [...filesList];
     const validFiles: WorkOrderAttachmentModel[] = filesArray
-      .filter((file: any) => this.acceptedMIMETypes.indexOf(file.type) >= 0)
       .map((file: any) => {
         const attachmentModel: WorkOrderAttachmentModel = {
           file: file,
@@ -60,11 +58,6 @@ export class FilesUploadComponent implements OnInit {
         return attachmentModel;
       });
     this.selectedFiles = [...this.selectedFiles, ...validFiles];
-    if (filesArray.some((file: any) => this.acceptedMIMETypes.indexOf(file.type) < 0)) {
-      this.snackBar.open(`Only files of the following MIME types are allowed: ${this.acceptedMIMETypes}`, "Error!", {
-        duration: 2000
-      });
-    }
   }
 
   uploadFile(index: number) {
