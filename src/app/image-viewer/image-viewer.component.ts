@@ -44,7 +44,7 @@ export class ImageViewerComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderDataService.filesUploadedSubject.pipe(
-      filter(orderUuid => this._orderUuid === this.orderUuid)
+      filter(orderUuid => this._orderUuid === orderUuid)
     ).subscribe({
       next: () => this.fetchOrderImagesMetadata()
     });
