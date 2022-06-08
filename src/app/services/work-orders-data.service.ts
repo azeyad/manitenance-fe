@@ -55,6 +55,10 @@ export class WorkOrdersDataService {
   }
 
   getWorkOrderImageBytes(orderUuid: String, imageUuid: String) {
-    return this.httpClient.get(`/api/v1/user/workorder/image?orderUuid=${orderUuid}&imageUuid=${imageUuid}`, {responseType: 'arraybuffer'});
+    return this.httpClient.get(`/api/v1/user/workorder/image?orderUuid=${orderUuid}&imageUuid=${imageUuid}`, { responseType: 'arraybuffer' });
+  }
+
+  deleteFile(orderUuid: String, fileUuid: String) {
+    return this.httpClient.delete(`/api/v1/user/workorder/${orderUuid}/image/${fileUuid}`);
   }
 }

@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
-import { EMPTY, finalize, switchMap, tap } from 'rxjs';
+import { EMPTY, filter, finalize, switchMap, tap } from 'rxjs';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { WorkOrderFileDataModel } from '../models/work-order-file-data-model';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 
@@ -37,7 +39,8 @@ export class ImageViewerComponent implements OnInit {
     return this._imageHeight;
   }
 
-  constructor(private snackBar: MatSnackBar, private orderDataService: WorkOrdersDataService, private sanitizer: DomSanitizer) { }
+  constructor(private snackBar: MatSnackBar, private orderDataService: WorkOrdersDataService,
+    private sanitizer: DomSanitizer, private dialog: MatDialog, private ordersDataService: WorkOrdersDataService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +48,7 @@ export class ImageViewerComponent implements OnInit {
   private fetchOrderImagesMetadata() {
     this.imagesList = [];
     this.activeImageIdx = 0;
+    this.isLoading = true;
     this.resetLoadingParameters();
     this.orderDataService.getWorkOrderImagesMetadata(this.orderUuid).pipe(
       tap((images: WorkOrderFileDataModel[]) => this.imagesList = images),
@@ -60,7 +64,6 @@ export class ImageViewerComponent implements OnInit {
 
   private resetLoadingParameters() {
     this.activeImageURL = "";
-    this.isLoading = true;
     this.imageLoadFailed = false;
     this.activeImageTitle = "";
   }
@@ -85,8 +88,36 @@ export class ImageViewerComponent implements OnInit {
     }
   }
 
+  removeImage() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: `Are you sure you want to delete image: ${this.activeImageTitle}?`
+      }
+    });
+
+    dialogRef.afterClosed().pipe(
+      filter(result => result),
+      switchMap(() => this.ordersDataService.deleteFile(this.orderUuid, this.imagesList[this.activeImageIdx].fileUuid))
+    ).subscribe({
+      next: () => {
+        this.imagesList.splice(this.activeImageIdx, 1);
+        if (this.imagesList.length > 0) {
+          this.loadActiveImage();
+        } else {
+          this.activeImageIdx = 0;
+          this.resetLoadingParameters();
+        }
+      }, error: () => {
+        this.snackBar.open(`Failed to delete image: ${this.activeImageTitle}`, "Error!", {
+          duration: 2000
+        })
+      }
+    });
+  }
+
   private loadActiveImage() {
     this.resetLoadingParameters();
+    this.isLoading = true;
     this.orderDataService.getWorkOrderImageBytes(this.orderUuid, this.imagesList[this.activeImageIdx].fileUuid).pipe(
       finalize(() => this.isLoading = false)
     )
@@ -108,6 +139,6 @@ export class ImageViewerComponent implements OnInit {
     this.imageLoadFailed = true;
     this.snackBar.open("Failed to load work order images.", "Error!", {
       duration: 2000
-    })
+    });
   }
 }

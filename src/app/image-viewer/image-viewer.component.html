@@ -4,7 +4,12 @@
         <p class="loader-container__text">Loading order images</p>
     </div>
     <mat-card-title *ngIf="activeImageTitle">
-        <span>{{activeImageTitle}}</span>
+        <span>{{activeImageTitle}}</span>        
+        <button mat-button class="mat-primary" (click)="removeImage()" matTooltip="Remove image" matTooltipPosition="right">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+
+    
     </mat-card-title>
     <mat-card-content>
         <div *ngIf="!isLoading" class="image-viewer">
@@ -16,11 +21,11 @@
     </mat-card-content>
     <mat-card-actions *ngIf="imagesList.length">
         <div style="display: flex;justify-content: center;">
-            <button mat-button class="mat-primary" (click)="prevImage()">
+            <button mat-button class="mat-primary" (click)="prevImage()" matTooltip="Previous" matTooltipPosition="left">
                 <mat-icon>arrow_back_ios</mat-icon>
             </button>
             <mat-card-title>{{activeImageIdx + 1}} / {{imagesList.length}}</mat-card-title>
-            <button mat-button class="mat-primary" (click)="nextImage()">
+            <button mat-button class="mat-primary" (click)="nextImage()" matTooltip="Next" matTooltipPosition="right">
                 <mat-icon>arrow_forward_ios</mat-icon>
             </button>
         </div>
