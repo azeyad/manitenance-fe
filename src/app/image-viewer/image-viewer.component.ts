@@ -43,6 +43,11 @@ export class ImageViewerComponent implements OnInit {
     private sanitizer: DomSanitizer, private dialog: MatDialog, private ordersDataService: WorkOrdersDataService) { }
 
   ngOnInit(): void {
+    this.orderDataService.filesUploadedSubject.pipe(
+      filter(orderUuid => this._orderUuid === this.orderUuid)
+    ).subscribe({
+      next: () => this.fetchOrderImagesMetadata()
+    });
   }
 
   private fetchOrderImagesMetadata() {

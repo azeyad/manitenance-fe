@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
 import { WorkOrdersSearchResponseModel } from '../models/work-orders-search-response-model';
 import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-request-model';
@@ -13,6 +13,8 @@ import { WorkOrderFileDataModel } from '../models/work-order-file-data-model';
   providedIn: 'root'
 })
 export class WorkOrdersDataService {
+
+  public filesUploadedSubject: Subject<String> = new Subject();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -47,7 +49,9 @@ export class WorkOrdersDataService {
   }
 
   uploadFiles(orderUuid: String, files: FormData) {
-    return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, files);
+    return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, files).pipe(
+      tap(() => this.filesUploadedSubject.next(orderUuid))
+    );
   }
 
   getWorkOrderImagesMetadata(orderUuid: String): Observable<WorkOrderFileDataModel[]> {
