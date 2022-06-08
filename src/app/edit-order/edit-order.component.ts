@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,11 +12,12 @@ import { WorkOrdersDataService } from '../services/work-orders-data.service';
   templateUrl: './edit-order.component.html',
   styleUrls: ['./edit-order.component.scss']
 })
-export class EditOrderComponent implements OnInit {
+export class EditOrderComponent implements OnInit, AfterViewInit {
 
   @ViewChild(OrderPropertiesComponent) orderPropertiesComponent: OrderPropertiesComponent;
+  @ViewChild('propertiesContainerElementRef') propertiesContainerElementRef: ElementRef;
 
-  private orderUuid: String;
+  orderUuid: String;
   currentLine: String;
   currentArea: String;
   currentMachine: String;
@@ -26,9 +27,11 @@ export class EditOrderComponent implements OnInit {
   description: String;
   orderNumber: String;
   orderDate: Date;
+  propertiesCardHeight = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
-
+  constructor(private router: Router, private route: ActivatedRoute,
+    private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const orderUuidRouteParam = this.route.snapshot.paramMap.get('orderUuid');
@@ -56,6 +59,10 @@ export class EditOrderComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/search');
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.propertiesCardHeight = this.propertiesContainerElementRef.nativeElement.clientHeight;
   }
 
   cancel(): void {

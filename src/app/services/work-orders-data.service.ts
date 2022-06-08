@@ -7,6 +7,7 @@ import { WorkOrdersSearchRequestModel } from '../models/work-orders-search-reque
 import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-request-model';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { WorkOrderModel } from '../models/work-order-model';
+import { WorkOrderFileDataModel } from '../models/work-order-file-data-model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,13 @@ export class WorkOrdersDataService {
 
   uploadFiles(orderUuid: String, files: FormData) {
     return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, files);
+  }
+
+  getWorkOrderImagesMetadata(orderUuid: String): Observable<WorkOrderFileDataModel[]> {
+    return this.httpClient.get<WorkOrderFileDataModel[]>(`/api/v1/user/workorder/images?orderUuid=${orderUuid}`);
+  }
+
+  getWorkOrderImageBytes(orderUuid: String, imageUuid: String) {
+    return this.httpClient.get(`/api/v1/user/workorder/image?orderUuid=${orderUuid}&imageUuid=${imageUuid}`, {responseType: 'arraybuffer'});
   }
 }

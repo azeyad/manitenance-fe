@@ -27,12 +27,15 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     this.dataSource.setData(value);
   }
   @Input() isLoading = false;
+
+  selectedOrder: WorkOrderModel;
   workOrdersTotalCount = 0;
   pageSize = 10;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @Output() pagingSortingChanged: EventEmitter<WorkOrderPagingSortingModel> = new EventEmitter();
   @Output() removeOrderRequest: EventEmitter<String> = new EventEmitter();
+  @Output() selectedOrderChanged: EventEmitter<String> = new EventEmitter();
 
   constructor(private router: Router, private dialog: MatDialog) { }
 
@@ -61,6 +64,9 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   setWOrkOrders(workOrdersResponseModel: WorkOrdersSearchResponseModel) {
     this.dataSource.setData(workOrdersResponseModel.workOrders);
     this.workOrdersTotalCount = workOrdersResponseModel.totalOrdersCount;
+    if (workOrdersResponseModel.workOrders.length > 0) {
+      this.selectOrder(workOrdersResponseModel.workOrders[0]);
+    }
   }
 
   reset() {
@@ -97,6 +103,11 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
         orderUuid: orderUuid
       }
     });
+  }
+
+  selectOrder(order: WorkOrderModel) {
+    this.selectedOrder = order;
+    this.selectedOrderChanged.emit(order.uuid);
   }
 }
 

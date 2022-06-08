@@ -344,7 +344,7 @@ mat-card-title {
 
 .loader-container {
     background: white;
-    position: fixed;
+    //position: fixed;
     top: 0;
     right: 0;
     left: 0;
@@ -767,21 +767,30 @@ mat-card-title {
             }
         }
 
+        .mat-row {
+            cursor: pointer;
+        }
+
+        .mat-row:hover .mat-cell {
+            background: map-get($custom-colors, primary-light);
+        }
+
         .highlighted-row {
-            animation-name: highlighted-row-pulse;
-            animation-duration: 1s;
-            animation-direction: alternate;
-            animation-iteration-count: 4;
+            // animation-name: highlighted-row-pulse;
+            // animation-duration: 1s;
+            // animation-direction: alternate;
+            // animation-iteration-count: 4;
 
-            @keyframes highlighted-row-pulse {
-                0% {
-                    background-color: transparent;
-                }
+            // @keyframes highlighted-row-pulse {
+            //     0% {
+            //         background-color: transparent;
+            //     }
 
-                100% {
-                    background-color: map-get($custom-colors, primary-light);
-                }
-            }
+            //     100% {
+            //         background-color: map-get($custom-colors, primary-light);
+            //     }
+            // }
+            background-color: map-get($custom-colors, primary-light);
         }
 
         .mat-cell {
@@ -886,4 +895,10 @@ mat-card-title {
             }
         }
     }
+}
+
+.image-viewer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

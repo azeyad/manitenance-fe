@@ -40,6 +40,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FilesUploadComponent } from './files-upload/files-upload.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ConfirmationDialogComponent,
     HeaderComponent,
     FooterComponent,
-    FilesUploadComponent
+    FilesUploadComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule,

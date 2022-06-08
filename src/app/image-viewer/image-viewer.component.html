@@ -1,0 +1,28 @@
+<mat-card class="card">
+    <div class="loader-container" *ngIf="isLoading">
+        <mat-spinner strokeWidth="4"></mat-spinner>
+        <p class="loader-container__text">Loading order images</p>
+    </div>
+    <mat-card-title *ngIf="activeImageTitle">
+        <span>{{activeImageTitle}}</span>
+    </mat-card-title>
+    <mat-card-content>
+        <div *ngIf="!isLoading" class="image-viewer">
+            <img [src]="activeImageURL" [height]="imageHeight" *ngIf="activeImageURL && !imageLoadFailed" />
+            <img src="../../assets/images/image_not_available_icon.jpg" [height]="imageHeight"
+                *ngIf="!activeImageURL && !imageLoadFailed" />
+            <img src="../../assets/images/image_loading_error.jpg" [height]="imageHeight" *ngIf="imageLoadFailed" />
+        </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="imagesList.length">
+        <div style="display: flex;justify-content: center;">
+            <button mat-button class="mat-primary" (click)="prevImage()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <mat-card-title>{{activeImageIdx + 1}} / {{imagesList.length}}</mat-card-title>
+            <button mat-button class="mat-primary" (click)="nextImage()">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+        </div>
+    </mat-card-actions>
+</mat-card>

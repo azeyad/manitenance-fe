@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { finalize } from 'rxjs';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
@@ -14,12 +14,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './orders-search.component.html',
   styleUrls: ['./orders-search.component.scss']
 })
-export class OrdersSearchComponent implements OnInit {
+export class OrdersSearchComponent implements OnInit, AfterViewInit {
 
   @ViewChild(OrdersListComponent) ordersListComponenet: OrdersListComponent;
   @ViewChild(OrderFiltersComponent) orderFiltersComponent: OrderFiltersComponent;
+  @ViewChild('filtersContainerElementRef') filtersContainerElementRef: ElementRef;
 
   isLoading = false;
+  filtersCardHeight = 0;
+  selectedWorkOrderUuid: String;
 
   constructor(private ordersDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
@@ -27,6 +30,9 @@ export class OrdersSearchComponent implements OnInit {
     this.loadTodayWorkOrders();
   }
 
+  ngAfterViewInit(): void {
+    this.filtersCardHeight = this.filtersContainerElementRef.nativeElement.clientHeight;
+  }
 
   private loadTodayWorkOrders() {
     const searchFilters: WorkOrdersSearchRequestModel = {
@@ -89,5 +95,9 @@ export class OrdersSearchComponent implements OnInit {
           });
         }
       });
+  }
+
+  onSelectedOrderChanged(orderUuid: String) {
+    this.selectedWorkOrderUuid = orderUuid;
   }
 }
