@@ -65,4 +65,8 @@ export class WorkOrdersDataService {
   deleteFile(orderUuid: String, fileUuid: String) {
     return this.httpClient.delete(`/api/v1/user/workorder/${orderUuid}/image/${fileUuid}`);
   }
+
+  releaseWorkOrder(orderUuid: String, statusUuid: String, assigneeUuid: String) {
+    return this.httpClient.post(`/api/v1/user/workorder/${orderUuid}/release`, { statusUuid: statusUuid, assigneeUuid: assigneeUuid });
+  }
 }

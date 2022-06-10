@@ -1,0 +1,46 @@
+<div class="loader-container" *ngIf="isLoading">
+    <mat-spinner strokeWidth="4"></mat-spinner>
+    <p class="loader-container__text">Loading...</p>
+</div>
+<div class="custom-mat-dialog" *ngIf="!isLoading">
+    <h2 mat-dialog-title>
+        <mat-icon>drive_file_rename_outline</mat-icon> Release order #{{workOrder.code}}
+    </h2>
+    <mat-dialog-content class="mat-typography">
+        <form #releaseForm="ngForm">
+            <div class="custom-mat-form-field">
+                <div class="row">
+                    <div class="column">
+                        <mat-form-field appearance="fill">
+                            <mat-label>
+                                Order status
+                            </mat-label>
+                            <mat-select name="status" [(ngModel)]="currentStatus" required>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let status of statuses" [value]="status.key">
+                                    {{status.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="column">
+                        <mat-form-field appearance="fill">
+                            <mat-label>
+                                Responsible
+                            </mat-label>
+                            <mat-select [(ngModel)]="currentAssignee" name="assignee" required>
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let user of users" [value]="user.key">{{user.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close class="secondary-button">Cancel</button>
+        <button mat-raised-button cdkFocusInitial class="primary-button"
+            [disabled]="releaseForm.pristine || !releaseForm.valid" (click)="releaseOrder()">Confirm</button>
+    </mat-dialog-actions>
+</div>

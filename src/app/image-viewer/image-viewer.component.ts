@@ -135,7 +135,7 @@ export class ImageViewerComponent implements OnInit {
   private renderImage(imageBuffer: any) {
     this.imageLoadFailed = false;
     this.activeImageTitle = this.imagesList[this.activeImageIdx].fileName;
-    const imageBlob = new Blob([imageBuffer], { type: 'image/jpg' });
+    const imageBlob = new Blob([imageBuffer], { type: this.imagesList[this.activeImageIdx].mimeType });
     this.activeImageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(imageBlob));
   }
 

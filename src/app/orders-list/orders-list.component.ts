@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FilesUploadComponent } from '../files-upload/files-upload.component';
+import { ReleaseOrderComponent } from '../release-order/release-order.component';
 
 @Component({
   selector: 'app-orders-list',
@@ -108,6 +109,14 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   selectOrder(order: WorkOrderModel) {
     this.selectedOrder = order;
     this.selectedOrderChanged.emit(order.uuid);
+  }
+
+  releaseWOrkOrder(order: WorkOrderModel) {
+    this.dialog.open(ReleaseOrderComponent, {
+      data: {
+        workOrder: order
+      }
+    });
   }
 }
 

@@ -41,6 +41,7 @@ import { FilesUploadComponent } from './files-upload/files-upload.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { ReleaseOrderComponent } from './release-order/release-order.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
     HeaderComponent,
     FooterComponent,
     FilesUploadComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    ReleaseOrderComponent
   ],
   imports: [
     BrowserModule,
