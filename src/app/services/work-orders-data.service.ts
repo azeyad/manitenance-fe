@@ -69,4 +69,8 @@ export class WorkOrdersDataService {
   releaseWorkOrder(orderUuid: String, statusUuid: String, assigneeUuid: String) {
     return this.httpClient.post(`/api/v1/user/workorder/${orderUuid}/release`, { statusUuid: statusUuid, assigneeUuid: assigneeUuid });
   }
+
+  getOrderPath(orderUuid: String) {
+    return this.httpClient.get(`/api/v1/user/workorder/${orderUuid}/directoryPath`, { responseType: 'text' });
+  }
 }

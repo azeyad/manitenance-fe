@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { WorkOrderModel } from '../models/work-order-model';
-import { filter, merge, Observable, ReplaySubject } from 'rxjs';
+import { filter, merge, Observable, ReplaySubject, switchMap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
@@ -11,6 +11,8 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { MatDialog } from '@angular/material/dialog';
 import { FilesUploadComponent } from '../files-upload/files-upload.component';
 import { ReleaseOrderComponent } from '../release-order/release-order.component';
+import { WorkOrdersDataService } from '../services/work-orders-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders-list',
@@ -38,7 +40,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   @Output() removeOrderRequest: EventEmitter<String> = new EventEmitter();
   @Output() selectedOrderChanged: EventEmitter<String> = new EventEmitter();
 
-  constructor(private router: Router, private dialog: MatDialog) { }
+  constructor(private router: Router, private dialog: MatDialog, private orderDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -117,6 +119,17 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
         workOrder: order
       }
     });
+  }
+
+  copyOrderPath(orderUuid: String) {
+    this.orderDataService.getOrderPath(orderUuid).pipe(
+      switchMap(path => navigator.clipboard.writeText(path))
+    ).subscribe({
+        next: () => this.snackBar.open("Work order path copied to clipboard", "Success"),
+        error: error => {           
+          this.snackBar.open("Failed to get order path", "Error");
+        }
+      })
   }
 }
 

@@ -18,7 +18,7 @@
                                 <mat-icon>upload</mat-icon>
                                 <span>Attach files</span>
                             </button>
-                            <button mat-menu-item>
+                            <button mat-menu-item (click)="copyOrderPath(order.uuid)">
                                 <mat-icon>folder</mat-icon>
                                 <span>Copy directroy path</span>
                             </button>
