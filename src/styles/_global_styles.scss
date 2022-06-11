@@ -772,7 +772,7 @@ mat-card-title {
         }
 
         .mat-row:hover .mat-cell {
-            background: map-get($custom-colors, primary-light);
+            background: lightgray;
         }
 
         .highlighted-row {
