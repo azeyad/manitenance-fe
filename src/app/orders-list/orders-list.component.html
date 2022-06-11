@@ -33,48 +33,14 @@
                         </mat-menu>
                     </td>
                 </ng-container>
-
-                <ng-container matColumnDef="code">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>W.O</th>
-                    <td mat-cell *matCellDef="let order">{{order.code}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
-                    <td mat-cell *matCellDef="let order">{{order.description}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="creationDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-                    <td mat-cell *matCellDef="let order">{{order.creationDate | date: "dd/MMM/yyyy"}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="machine">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipment</th>
-                    <td mat-cell *matCellDef="let order">{{order.machine}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="area">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Area</th>
-                    <td mat-cell *matCellDef="let order">{{order.area}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="department">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
-                    <td mat-cell *matCellDef="let order">{{order.department}}</td>
-                </ng-container>
-
-
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                    <td mat-cell *matCellDef="let order">{{order.status}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="assignee">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsible</th>
-                    <td mat-cell *matCellDef="let order">{{order.assignee}}</td>
-                </ng-container>
-
+                <mat-text-column name="code" aria-readonly="true"></mat-text-column>
+                <mat-text-column name="description"></mat-text-column>
+                <mat-text-column name="creationDate"></mat-text-column>
+                <mat-text-column name="machine"></mat-text-column>
+                <mat-text-column name="area"></mat-text-column>
+                <mat-text-column name="department"></mat-text-column>
+                <mat-text-column name="status"></mat-text-column>
+                <mat-text-column name="assignee"></mat-text-column>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     [ngClass]="{'highlighted-row': selectedOrder == row}" (click)="selectOrder(row)"></tr>

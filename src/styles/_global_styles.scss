@@ -771,7 +771,7 @@ mat-card-title {
             cursor: pointer;
         }
 
-        .mat-row:hover .mat-cell {
+        .mat-row:hover:not(.highlighted-row) .mat-cell:not(.highlighted-row) {
             background: lightgray;
         }
 
