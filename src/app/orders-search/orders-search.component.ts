@@ -8,6 +8,7 @@ import { OrderFiltersComponent } from '../order-filters/order-filters.component'
 import { OrdersListComponent } from '../orders-list/orders-list.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-orders-search',
@@ -60,12 +61,20 @@ export class OrdersSearchComponent implements OnInit, AfterViewInit {
       finalize(() => this.isLoading = false)
     ).subscribe({
       next: (orders: WorkOrdersSearchResponseModel) => this.ordersListComponenet.setWOrkOrders(orders),
-      error: () => {
-        this.snackBar.open("Failed to search work order", "Error!", {
-          duration: 2000
-        });
-      }
+      error: (error: HttpErrorResponse) => this.handleSearchOrdersRequestError(error)
     });
+  }
+
+  private handleSearchOrdersRequestError(error: HttpErrorResponse) {
+    if (error.status === HttpStatusCode.NotFound) {
+      this.snackBar.open("No work orders found with selected fitlers", "Info", {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open("Failed to search work order", "Error!", {
+        duration: 2000
+      });
+    }
   }
 
   reloadWorkOrders() {

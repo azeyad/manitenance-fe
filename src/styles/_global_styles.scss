@@ -143,7 +143,8 @@
         .mat-tab-link {
             color: map-get($custom-colors, default-text);
             text-decoration: none;
-            text-transform: uppercase;
+            text-transform: capitalize;
+            font-weight: bold;
 
             &.mat-tab-label-active,
             &:hover {
@@ -291,7 +292,7 @@ mat-card-title {
 
             .section-header {
                 font-family: 'RobotoBold', sans-serif;
-                text-transform: uppercase;
+                text-transform: capitalize;
             }
 
             .section-links {
@@ -751,6 +752,27 @@ mat-card-title {
     }
 }
 
+.blog-links {
+    list-style: none;
+    margin-top: 2rem;
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        font-weight: bold;
+
+        span {
+            color: map-get($custom-colors, primary);
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.order-audit-details-row {
+    height: auto;
+}
+
 .custom-mat-table {
     border: solid 1px map-get($custom-colors, primary);
 
@@ -771,7 +793,7 @@ mat-card-title {
             cursor: pointer;
         }
 
-        .mat-row:hover:not(.highlighted-row) .mat-cell:not(.highlighted-row) {
+        .mat-row:hover:not(.highlighted-row):not(.order-audit-details-row) .mat-cell:not(.highlighted-row):not(.order-audit-details-row) {
             background: lightgray;
         }
 
@@ -900,4 +922,8 @@ mat-card-title {
 .image-viewer {
     display: flex;
     flex-wrap: wrap;
+}
+
+.custom-mat-icon {    
+    color: map-get($custom-colors, primary);
 }

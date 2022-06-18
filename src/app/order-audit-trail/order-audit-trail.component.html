@@ -1,0 +1,82 @@
+<mat-card class="card">
+    <mat-card-title>Show history for specific work order</mat-card-title>
+    <mat-card-content>
+        <div class="custom-mat-form-field">
+
+            <div class="column">
+                <mat-form-field appearance="fill">
+                    <mat-label>
+                        W.O
+                    </mat-label>
+                    <input matInput placeholder="Type Order number" [(ngModel)]="orderNumber" name="orderNumber" />
+                </mat-form-field>
+            </div>
+
+        </div>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="flex-end">
+        <button class="mat-raised-button mat-warn" mat-button (click)="clearFilters()">
+            <mat-icon>restart_alt</mat-icon>Clear
+        </button>
+        <button class="mat-raised-button mat-primary" mat-button cdkFocusInitial [disabled]="orderNumber.length===0"
+            (click)="searchHistory()">
+            <mat-icon>search</mat-icon>Search
+        </button>
+    </mat-card-actions>
+</mat-card>
+<mat-card class="card">
+    <mat-card-content>
+        <div class="custom-mat-table">
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="custom-mat-table__grid">
+                <ng-container matColumnDef="detailsExpand">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let auditModel" (click)="expandAudotDetails(auditModel)">
+                        <span *ngIf="auditModel.details.length > 0 && auditModel === expandedAuditModel"
+                            class="material-icons custom-mat-icon">remove_circle</span>
+                        <span *ngIf="auditModel.details.length > 0 && auditModel !== expandedAuditModel"
+                            class="material-icons custom-mat-icon">add_circle</span>
+                </ng-container>
+                <mat-text-column name="user"></mat-text-column>
+                <mat-text-column name="action"></mat-text-column>
+                <ng-container matColumnDef="orderCode">
+                    <th mat-header-cell *matHeaderCellDef>Order code</th>
+                    <td mat-cell *matCellDef="let auditModel">
+                        <a [routerLink]="['/edit', auditModel.orderUuid]">{{auditModel.orderCode}}</a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="dateTime">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let auditModel">
+                        {{ auditModel.dateTime | date :'short'}}
+                    </td>
+                </ng-container>
+                <!-- Expanded Content Column -->
+                <ng-container matColumnDef="auditModelDetails">
+                    <td mat-cell *matCellDef="let auditModel" [attr.colspan]="auditModelColumns.length">
+                        <div [@detailExpand]="auditModel == expandedAuditModel ? 'expanded' : 'collapsed'">
+                            <ul class="blog-links" *ngFor="let auditDetailsModel of auditModel.details">
+                                <li>
+                                    <span class="material-icons">
+                                        manage_history
+                                    </span>
+                                    <a href><span>{{auditDetailsModel.propertyName}} changed from
+                                            {{auditDetailsModel.previousValue}} to
+                                            {{auditDetailsModel.currentValue}}</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="auditModelColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: auditModelColumns">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['auditModelDetails']" class="order-audit-details-row"
+                    style="height: auto;"></tr>
+            </table>
+        </div>
+        <div class="loader-container" *ngIf="isLoading">
+            <mat-spinner strokeWidth="4"></mat-spinner>
+            <p class="loader-container__text">Loading order history...</p>
+        </div>
+    </mat-card-content>
+</mat-card>

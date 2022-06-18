@@ -42,6 +42,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { ReleaseOrderComponent } from './release-order/release-order.component';
+import { OrderAuditTrailComponent } from './order-audit-trail/order-audit-trail.component';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { ReleaseOrderComponent } from './release-order/release-order.component';
     FooterComponent,
     FilesUploadComponent,
     ImageViewerComponent,
-    ReleaseOrderComponent
+    ReleaseOrderComponent,
+    OrderAuditTrailComponent,
+    InfoDialogComponent
   ],
   imports: [
     BrowserModule,

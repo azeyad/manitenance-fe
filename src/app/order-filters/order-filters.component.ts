@@ -51,8 +51,8 @@ export class OrderFiltersComponent implements OnInit {
   currentStatus: String;
   description: String = '';
   orderNumber: String = '';
-  orderDateFrom: Date | null = null;
-  orderDateTo: Date | null = null;
+  orderDateFrom: Date | null = new Date();
+  orderDateTo: Date | null = new Date();
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];

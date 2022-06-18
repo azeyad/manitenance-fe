@@ -8,6 +8,7 @@ import { WorkOrdersCreateRequestModel } from '../models/work-orders-create-reque
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { WorkOrderModel } from '../models/work-order-model';
 import { WorkOrderFileDataModel } from '../models/work-order-file-data-model';
+import { AuditTrailModel } from '../models/audit-trail-model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,13 @@ export class WorkOrdersDataService {
 
   getOrderPath(orderUuid: String) {
     return this.httpClient.get(`/api/v1/user/workorder/${orderUuid}/directoryPath`, { responseType: 'text' });
+  }
+
+  getOrderAuditTrailsByOrderUuid(orderUuid: String): Observable<AuditTrailModel[]> {
+    return this.httpClient.get<AuditTrailModel[]>(`/api/v1/user/workorder/${orderUuid}/auditTrails`);
+  }
+
+  getOrderAuditTrailsByOrderCode(orderCode: String): Observable<AuditTrailModel[]> {
+    return this.httpClient.get<AuditTrailModel[]>(`/api/v1/user/workorder/${orderCode}/auditTrails/search`);
   }
 }

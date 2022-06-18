@@ -30,17 +30,21 @@
                                 <mat-icon>delete</mat-icon>
                                 <span>Delete order</span>
                             </button>
+                            <button mat-menu-item (click)="openAuditTrails(order)">
+                                <mat-icon>work_history</mat-icon>
+                                <span>Open history</span>
+                            </button>
                         </mat-menu>
                     </td>
                 </ng-container>
                 <mat-text-column name="code" aria-readonly="true"></mat-text-column>
                 <mat-text-column name="description"></mat-text-column>
-                <mat-text-column name="creationDate"></mat-text-column>
+                <mat-text-column name="creationDate" headerText="Order date"></mat-text-column>
                 <mat-text-column name="machine"></mat-text-column>
                 <mat-text-column name="area"></mat-text-column>
                 <mat-text-column name="department"></mat-text-column>
                 <mat-text-column name="status"></mat-text-column>
-                <mat-text-column name="assignee"></mat-text-column>
+                <mat-text-column name="assignee" headerText="Responsible"></mat-text-column>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     [ngClass]="{'highlighted-row': selectedOrder == row}" (click)="selectOrder(row)"></tr>

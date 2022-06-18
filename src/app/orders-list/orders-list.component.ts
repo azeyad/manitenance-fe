@@ -125,11 +125,15 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     this.orderDataService.getOrderPath(orderUuid).pipe(
       switchMap(path => navigator.clipboard.writeText(path))
     ).subscribe({
-        next: () => this.snackBar.open("Work order path copied to clipboard", "Success"),
-        error: error => {           
-          this.snackBar.open("Failed to get order path", "Error");
-        }
-      })
+      next: () => this.snackBar.open("Work order path copied to clipboard", "Success"),
+      error: error => {
+        this.snackBar.open("Failed to get order path", "Error");
+      }
+    })
+  }
+
+  openAuditTrails(order: WorkOrderModel) {
+    this.router.navigateByUrl(`/history/${order.uuid}`);
   }
 }
 
