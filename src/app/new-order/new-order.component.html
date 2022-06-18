@@ -4,7 +4,7 @@
             <mat-icon>drive_file_rename_outline</mat-icon> Create work order
         </mat-card-title>
         <mat-card-content>
-            <app-order-properties></app-order-properties>
+            <app-order-properties [currentStatus]="'FYI'"></app-order-properties>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="flex-end">
             <button class="mat-raised-button mat-warn" mat-button (click)="cancel()">
