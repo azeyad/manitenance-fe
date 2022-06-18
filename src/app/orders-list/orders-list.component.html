@@ -14,7 +14,8 @@
                                 <mat-icon>edit</mat-icon>
                                 <span>Edit</span>
                             </button>
-                            <button mat-menu-item (click)="attachFiles(order.uuid)" [disabled]="order.status==='Finish'">
+                            <button mat-menu-item (click)="attachFiles(order.uuid)"
+                                [disabled]="order.status==='Finish'">
                                 <mat-icon>upload</mat-icon>
                                 <span>Attach files</span>
                             </button>
@@ -38,14 +39,47 @@
                         </mat-menu>
                     </td>
                 </ng-container>
-                <mat-text-column name="code" aria-readonly="true"></mat-text-column>
-                <mat-text-column name="description"></mat-text-column>
-                <mat-text-column name="creationDate" headerText="Order date"></mat-text-column>
-                <mat-text-column name="machine"></mat-text-column>
-                <mat-text-column name="area"></mat-text-column>
-                <mat-text-column name="department"></mat-text-column>
-                <mat-text-column name="status"></mat-text-column>
-                <mat-text-column name="assignee" headerText="Responsible"></mat-text-column>
+                
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Number </th>
+                    <td mat-cell *matCellDef="let order"> {{order.code}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let order"> {{order.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Order date </th>
+                    <td mat-cell *matCellDef="let order"> {{order.creationDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="machine">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Machine </th>
+                    <td mat-cell *matCellDef="let order"> {{order.machine}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="area">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Area </th>
+                    <td mat-cell *matCellDef="let order"> {{order.area}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="department">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                    <td mat-cell *matCellDef="let order"> {{order.department}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="assignee">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsible </th>
+                    <td mat-cell *matCellDef="let order"> {{order.assignee}} </td>
+                </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     [ngClass]="{'highlighted-row': selectedOrder == row}" (click)="selectOrder(row)"></tr>
