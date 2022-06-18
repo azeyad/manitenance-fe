@@ -6,7 +6,7 @@
         <p>{{message}}</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-raised-button mat-dialog-close class="secondary-button">Cancel</button>
-        <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial class="primary-button">Confirm</button>
+        <button mat-raised-button (click)="onCancel()" class="secondary-button">Cancel</button>
+        <button mat-raised-button (click)="onConfirm()" cdkFocusInitial class="primary-button">Confirm</button>
     </mat-dialog-actions>
 </div>

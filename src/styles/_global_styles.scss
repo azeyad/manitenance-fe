@@ -927,3 +927,9 @@ mat-card-title {
 .custom-mat-icon {    
     color: map-get($custom-colors, primary);
 }
+
+td , th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 150px;
+}

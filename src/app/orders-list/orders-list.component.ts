@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { WorkOrderModel } from '../models/work-order-model';
-import { filter, merge, Observable, ReplaySubject, switchMap } from 'rxjs';
+import { filter, merge, Observable, ReplaySubject, switchMap, tap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { WorkOrderPagingSortingModel } from '../models/work-order-paging-sorting-model';
@@ -68,9 +68,18 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   setWOrkOrders(workOrdersResponseModel: WorkOrdersSearchResponseModel) {
     this.dataSource.setData(workOrdersResponseModel.workOrders);
     this.workOrdersTotalCount = workOrdersResponseModel.totalOrdersCount;
-    if (workOrdersResponseModel.workOrders.length > 0) {
-      this.selectOrder(workOrdersResponseModel.workOrders[0]);
+    if (workOrdersResponseModel.workOrders && workOrdersResponseModel.workOrders.length > 0) {
+      const selectedOrderIndex = this.getSelectedOrderIndex(workOrdersResponseModel);
+      this.selectOrder(workOrdersResponseModel.workOrders[selectedOrderIndex]);
     }
+  }
+
+  private getSelectedOrderIndex(workOrdersResponseModel: WorkOrdersSearchResponseModel): number {
+    if (this.selectedOrder && workOrdersResponseModel.workOrders && workOrdersResponseModel.workOrders.length > 0) {
+      const prevSelectedOrderIndex = workOrdersResponseModel.workOrders.findIndex(p => p.uuid === this.selectedOrder.uuid);
+      if (prevSelectedOrderIndex !== -1) return prevSelectedOrderIndex;
+    }
+    return 0;
   }
 
   reset() {
@@ -120,7 +129,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
         workOrder: order
       }
     });
-    dialogRef.afterClosed().pipe(filter(result => result))
+    dialogRef.afterClosed().pipe(tap(res => console.log(JSON.stringify(res))), filter(result => result))
       .subscribe(() => {
         this.orderReleased.emit();
       });

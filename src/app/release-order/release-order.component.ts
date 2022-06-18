@@ -23,7 +23,7 @@ export class ReleaseOrderComponent implements OnInit {
   isLoading = true;
 
   constructor(private lookupsService: OrderLookupDataService, private orderDataService: WorkOrdersDataService,
-    @Inject(MAT_DIALOG_DATA) data: any, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<any>) {
+    @Inject(MAT_DIALOG_DATA) data: any, private snackBar: MatSnackBar, private dialogRef: MatDialogRef<ReleaseOrderComponent>) {
     this.workOrder = data.workOrder;
   }
 
@@ -53,5 +53,13 @@ export class ReleaseOrderComponent implements OnInit {
           this.snackBar.open(`Failed to release order #${this.workOrder.code}.`, "Failed");
         }
       });
+  }
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  onConfirm(): void {
+    this.dialogRef.close({ confirmed: true });
   }
 }
