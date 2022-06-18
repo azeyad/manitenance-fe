@@ -109,4 +109,11 @@ export class OrdersSearchComponent implements OnInit, AfterViewInit {
   onSelectedOrderChanged(orderUuid: String) {
     this.selectedWorkOrderUuid = orderUuid;
   }
+
+  onOrderReleased() {
+    this.snackBar.open("Order released successfuly", "Success!", {
+      duration: 2000
+    });
+    this.reloadWorkOrders();
+  }
 }

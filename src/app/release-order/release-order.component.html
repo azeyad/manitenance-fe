@@ -40,7 +40,7 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button mat-raised-button mat-dialog-close class="secondary-button">Cancel</button>
-        <button mat-raised-button cdkFocusInitial class="primary-button"
+        <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial class="primary-button"
             [disabled]="releaseForm.pristine || !releaseForm.valid" (click)="releaseOrder()">Confirm</button>
     </mat-dialog-actions>
 </div>

@@ -39,6 +39,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   @Output() pagingSortingChanged: EventEmitter<WorkOrderPagingSortingModel> = new EventEmitter();
   @Output() removeOrderRequest: EventEmitter<String> = new EventEmitter();
   @Output() selectedOrderChanged: EventEmitter<String> = new EventEmitter();
+  @Output() orderReleased: EventEmitter<void> = new EventEmitter();
 
   constructor(private router: Router, private dialog: MatDialog, private orderDataService: WorkOrdersDataService, private snackBar: MatSnackBar) { }
 
@@ -114,11 +115,15 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   }
 
   releaseWOrkOrder(order: WorkOrderModel) {
-    this.dialog.open(ReleaseOrderComponent, {
+    const dialogRef = this.dialog.open(ReleaseOrderComponent, {
       data: {
         workOrder: order
       }
     });
+    dialogRef.afterClosed().pipe(filter(result => result))
+      .subscribe(() => {
+        this.orderReleased.emit();
+      });
   }
 
   copyOrderPath(orderUuid: String) {

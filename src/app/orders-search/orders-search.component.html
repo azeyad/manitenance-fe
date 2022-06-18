@@ -15,7 +15,7 @@
         <div class="row">
             <app-orders-list [isLoading]="isLoading" (pagingSortingChanged)='onPagingSortingChanged($event)'
                 (removeOrderRequest)="onRemoveWorkOrder($event)"
-                (selectedOrderChanged)="onSelectedOrderChanged($event)"></app-orders-list>
+                (selectedOrderChanged)="onSelectedOrderChanged($event)" (orderReleased)="onOrderReleased()"></app-orders-list>
         </div>
     </mat-card-content>
 </mat-card>
