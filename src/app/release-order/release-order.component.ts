@@ -32,10 +32,14 @@ export class ReleaseOrderComponent implements OnInit {
     this.currentStatus = this.workOrder.status;
     this.users = [];
     this.currentAssignee = this.workOrder.assigneeUuid;
-    merge(this.lookupsService.loadOrderStatuses().pipe(tap(statusesData => this.statuses = statusesData)),
+    merge(this.lookupsService.loadOrderStatuses().pipe(tap(statusesData => this.populateStatusList(statusesData))),
       this.lookupsService.loadUsers().pipe(tap(usersData => this.users = usersData))).pipe(
         finalize(() => this.isLoading = false)
       ).subscribe();
+  }
+
+  private populateStatusList(statusesData: OrderDataLookup[]): void {
+    this.statuses = statusesData.filter((status: OrderDataLookup) => this.workOrder.status !== status.key && status.key !== "FYI")
   }
 
   releaseOrder() {

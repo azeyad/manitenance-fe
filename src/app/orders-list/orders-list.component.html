@@ -10,11 +10,11 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="editOrder(order.uuid)">
+                            <button mat-menu-item (click)="editOrder(order.uuid)" [disabled]="order.status==='Finish'">
                                 <mat-icon>edit</mat-icon>
                                 <span>Edit</span>
                             </button>
-                            <button mat-menu-item (click)="attachFiles(order.uuid)">
+                            <button mat-menu-item (click)="attachFiles(order.uuid)" [disabled]="order.status==='Finish'">
                                 <mat-icon>upload</mat-icon>
                                 <span>Attach files</span>
                             </button>
@@ -22,11 +22,12 @@
                                 <mat-icon>folder</mat-icon>
                                 <span>Copy directroy path</span>
                             </button>
-                            <button mat-menu-item (click)="releaseWOrkOrder(order)">
+                            <button mat-menu-item (click)="releaseWOrkOrder(order)"
+                                [disabled]="order.status!=='PEX' && order.status!=='PPR'">
                                 <mat-icon>check_circle</mat-icon>
                                 <span>Release</span>
                             </button>
-                            <button mat-menu-item (click)="removeOrder(order)">
+                            <button mat-menu-item (click)="removeOrder(order)" [disabled]="order.status==='Finish'">
                                 <mat-icon>delete</mat-icon>
                                 <span>Delete order</span>
                             </button>
