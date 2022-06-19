@@ -149,6 +149,12 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   openAuditTrails(order: WorkOrderModel) {
     this.router.navigateByUrl(`/history/${order.uuid}`);
   }
+
+  formatOrderDate(order: WorkOrderModel) {
+    const date = new Date(order.creationDate).toLocaleDateString(navigator.language);
+    const time = new Date(order.creationDate).toLocaleTimeString(navigator.language);
+    return `${date}, ${time}`;
+  }
 }
 
 class WorkOrdersDataSource extends DataSource<WorkOrderModel> {
