@@ -21,7 +21,7 @@
                             </button>
                             <button mat-menu-item (click)="copyOrderPath(order.uuid)">
                                 <mat-icon>folder</mat-icon>
-                                <span>Copy directroy path</span>
+                                <span>Copy path</span>
                             </button>
                             <button mat-menu-item (click)="releaseWOrkOrder(order)"
                                 [disabled]="order.status!=='PEX' && order.status!=='PPR'">
@@ -30,11 +30,11 @@
                             </button>
                             <button mat-menu-item (click)="removeOrder(order)" [disabled]="order.status==='Finish'">
                                 <mat-icon>delete</mat-icon>
-                                <span>Delete order</span>
+                                <span>Delete</span>
                             </button>
                             <button mat-menu-item (click)="openAuditTrails(order)">
                                 <mat-icon>work_history</mat-icon>
-                                <span>Open history</span>
+                                <span>History</span>
                             </button>
                         </mat-menu>
                     </td>

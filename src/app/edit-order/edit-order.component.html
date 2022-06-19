@@ -13,11 +13,13 @@
             <mat-card-actions>
                 <div style="display: flex;justify-content: space-around;">
                     <div>
-                        <button [disabled]="isSaving" class="mat-raised-button mat-primary" mat-button cdkFocusInitial type="button"
-                            (click)="uploadFiles()">
+                        <button [disabled]="isSaving" class="mat-raised-button mat-primary" mat-button cdkFocusInitial
+                            type="button" (click)="uploadFiles()">
                             <mat-icon>file_upload</mat-icon> attach files
                         </button>
-                        <button [disabled]="isSaving" class="mat-raised-button " mat-button (click)="releaseOrder()">Release</button>
+                        <button
+                            [disabled]="isSaving || (workOrderModel.status!=='PEX' && workOrderModel.status!=='PPR')"
+                            class="mat-raised-button " mat-button (click)="releaseOrder()">Release</button>
                     </div>
                     <div>
                         <button [disabled]="isSaving" class="mat-raised-button mat-warn" mat-button (click)="cancel()">

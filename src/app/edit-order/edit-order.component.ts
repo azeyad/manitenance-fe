@@ -2,10 +2,12 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { filter, finalize, tap } from 'rxjs';
 import { FilesUploadComponent } from '../files-upload/files-upload.component';
+import { WorkOrderModel } from '../models/work-order-model';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { OrderPropertiesComponent } from '../order-properties/order-properties.component';
+import { ReleaseOrderComponent } from '../release-order/release-order.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 
 @Component({
@@ -30,6 +32,7 @@ export class EditOrderComponent implements OnInit, AfterViewInit {
   orderDate: Date;
   propertiesCardHeight = 0;
   isSaving = false;
+  workOrderModel: WorkOrderModel;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar,
@@ -42,6 +45,7 @@ export class EditOrderComponent implements OnInit, AfterViewInit {
       this.workOrderDataService.getWorkOrderByUuid(this.orderUuid)
         .subscribe({
           next: workOrder => {
+            this.workOrderModel = workOrder;
             this.currentArea = workOrder.areaUuid;
             this.currentLine = workOrder.lineUuid;
             this.currentDept = workOrder.departmentUuid;
@@ -103,7 +107,15 @@ export class EditOrderComponent implements OnInit, AfterViewInit {
   }
 
   releaseOrder(): void {
-
+    const dialogRef = this.dialog.open(ReleaseOrderComponent, {
+      data: {
+        workOrder: this.workOrderModel
+      }
+    });
+    dialogRef.afterClosed().pipe(tap(res => console.log(JSON.stringify(res))), filter(result => result))
+      .subscribe(() => {
+        this.router.navigateByUrl('/search');
+      });
   }
 
 }
