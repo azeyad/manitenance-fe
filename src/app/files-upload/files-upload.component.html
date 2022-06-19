@@ -11,13 +11,13 @@
                         {{selected_file.file.name}}
                     </div>
                     <div class="selected-file__actions">
-                        <button matRipple class="selected_file__upload primary-button" matTooltip="Upload"
+                        <!-- <button matRipple class="selected_file__upload primary-button" matTooltip="Upload"
                             matTooltipPosition="left" aria-label="Upload File" (click)="uploadFile(i)"
                             [disabled]="selected_file.isUploadInProgress || selected_file.uploadResult=='success'">
                             <mat-icon *ngIf="selected_file.uploadResult!='success'" aria-hidden="true">file_upload
                             </mat-icon>
                             <mat-icon *ngIf="selected_file.uploadResult=='success'">check</mat-icon>
-                        </button>
+                        </button> -->
                         <button matRipple class="selected_file__cancel secondary-button" matTooltip="Cancel"
                             [disabled]="isUploadInProgress() || selected_file.uploadResult=='success'"
                             matTooltipPosition="right" aria-label="Cancel File" (click)="cancelFile(i)">
@@ -43,7 +43,7 @@
         <button matRipple class="file-upload__browse primary-button" (click)="openFileSelector()">
             Browse Files
         </button>
-        <ng-container *ngIf="selectedFiles.length>1">
+        <ng-container>
             <button matRipple class="all_file__upload primary-button" matTooltip="upload all" matTooltipPosition="above"
                 aria-label="Attach All Files" (click)="uploadAll()" [disabled]="!isAnyFileNotUploaded()">
                 <mat-icon>file_upload</mat-icon>
