@@ -44,7 +44,7 @@
             Browse Files
         </button>
         <ng-container *ngIf="selectedFiles.length>1">
-            <button matRipple class="all_file__upload primary-button" matTooltip="Confirm" matTooltipPosition="above"
+            <button matRipple class="all_file__upload primary-button" matTooltip="upload all" matTooltipPosition="above"
                 aria-label="Attach All Files" (click)="uploadAll()" [disabled]="!isAnyFileNotUploaded()">
                 <mat-icon>file_upload</mat-icon>
             </button>

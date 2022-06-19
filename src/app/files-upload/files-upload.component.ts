@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WorkOrderAttachmentModel } from '../models/work-order-attachment.model';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
@@ -19,7 +19,7 @@ export class FilesUploadComponent implements OnInit {
 
   fileSelectionForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private snackBar: MatSnackBar, private ordersDataService: WorkOrdersDataService) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private snackBar: MatSnackBar, private ordersDataService: WorkOrdersDataService, private dialogRef: MatDialogRef<FilesUploadComponent>) {
     this.workOrderUuid = data.orderUuid;
     this.fileSelectionForm = new FormGroup({
       file_selection: new FormControl()
@@ -103,6 +103,7 @@ export class FilesUploadComponent implements OnInit {
             p.uploadResult = "success";
           });
           this.showSuccessUploadSnackBar();
+          this.dialogRef.close();
         }, error: () => {
           this.selectedFiles.forEach(p => {
             p.isUploadInProgress = false;
