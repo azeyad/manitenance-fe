@@ -37,8 +37,8 @@ export class OrdersSearchComponent implements OnInit, AfterViewInit {
 
   private loadTodayWorkOrders() {
     const searchFilters: WorkOrdersSearchRequestModel = {
-      from: moment().format('YYYY-MM-DD'),
-      to: moment().format('YYYY-MM-DD')
+      from: moment().startOf('day').startOf('day').toISOString(),
+      to: moment().endOf('day').endOf('day').toISOString()
     };
     const pagingSortingParams: WorkOrderPagingSortingModel = {
       page: 0,
