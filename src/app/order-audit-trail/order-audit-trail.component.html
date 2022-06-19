@@ -59,9 +59,16 @@
                                     <span class="material-icons">
                                         manage_history
                                     </span>
-                                    <a href><span>{{auditDetailsModel.propertyName}} changed from
+                                    <a
+                                        *ngIf="auditModel.action!=='Deleted files' && auditModel.action!=='Attached files'"><span>{{auditDetailsModel.propertyName}}
+                                            changed from
                                             {{auditDetailsModel.previousValue}} to
                                             {{auditDetailsModel.currentValue}}</span></a>
+                                    <a *ngIf="auditModel.action==='Attached files'"><span> File name:
+                                            {{auditDetailsModel.currentValue}}</span></a>
+                                    <a *ngIf="auditModel.action==='Deleted files'"><span> File name:
+                                            {{auditDetailsModel.previousValue}}</span></a>
+
                                 </li>
                             </ul>
                         </div>
