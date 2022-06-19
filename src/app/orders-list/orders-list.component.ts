@@ -13,6 +13,7 @@ import { FilesUploadComponent } from '../files-upload/files-upload.component';
 import { ReleaseOrderComponent } from '../release-order/release-order.component';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-orders-list',
@@ -151,9 +152,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
   }
 
   formatOrderDate(order: WorkOrderModel) {
-    const date = new Date(order.creationDate).toLocaleDateString(navigator.language);
-    const time = new Date(order.creationDate).toLocaleTimeString(navigator.language);
-    return `${date}, ${time}`;
+    const offset = moment().utcOffset();
+    return moment.utc(order.creationDate).utcOffset(offset).format("L LT");
   }
 }
 

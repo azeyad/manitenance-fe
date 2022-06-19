@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { finalize } from 'rxjs';
 import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { AuditTrailModel } from '../models/audit-trail-model';
@@ -79,5 +80,11 @@ export class OrderAuditTrailComponent implements OnInit {
       this.snackBar.open("Failed to load order audit info.", "Error");
     }
   }
+
+  formatOrderDate(auditModel: AuditTrailModel) {
+    const offset = moment().utcOffset();
+    return moment.utc(auditModel.dateTime).utcOffset(offset).format("L LT");
+  }
+
 }
 
