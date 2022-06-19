@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { FilesUploadComponent } from '../files-upload/files-upload.component';
 import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-request-model';
 import { OrderPropertiesComponent } from '../order-properties/order-properties.component';
@@ -28,6 +29,7 @@ export class EditOrderComponent implements OnInit, AfterViewInit {
   orderNumber: String;
   orderDate: Date;
   propertiesCardHeight = 0;
+  isSaving = false;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private workOrderDataService: WorkOrdersDataService, private snackBar: MatSnackBar,
@@ -70,12 +72,13 @@ export class EditOrderComponent implements OnInit, AfterViewInit {
   }
 
   canSubmit(): boolean {
-    return this.orderUuid && this.orderPropertiesComponent && this.orderPropertiesComponent.isValid() && this.orderPropertiesComponent.isChanged();
+    return this.orderUuid && this.orderPropertiesComponent && this.orderPropertiesComponent.isValid() && this.orderPropertiesComponent.isChanged() && !this.isSaving;
   }
 
   submit(): void {
+    this.isSaving = true;
     const orderModel: WorkOrdersUpdateRequestModel = { ...this.orderPropertiesComponent.getOrderCreateRequestModel(), workOrderUuid: this.orderUuid ? this.orderUuid : '' };
-    this.workOrderDataService.editWorkOrder(orderModel)
+    this.workOrderDataService.editWorkOrder(orderModel).pipe(finalize(() => this.isSaving = false))
       .subscribe({
         next: () => {
           this.snackBar.open("Work order updated successfully", "Success!", {

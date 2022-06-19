@@ -37,11 +37,11 @@ export class WorkOrdersDataService {
     );
   }
 
-  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel): Observable<WorkOrderModel> {
+  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel): Observable<WorkOrderModel> {    
     return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/create', workorderModel);
   }
 
-  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel): Observable<WorkOrderModel> {
+  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel): Observable<WorkOrderModel> {    
     return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/update', workorderModel);
   }
 

@@ -61,8 +61,16 @@ export class OrderPropertiesComponent implements OnInit {
   description: String;
   @Input()
   orderNumber: String;
+  private _orderDate: Date = new Date(moment.now());
   @Input()
-  orderDate: Date = new Date(moment.now());
+  set orderDate(value) {    
+    const offset = moment().utcOffset();
+    value = moment.utc(value).utcOffset(offset).toDate();
+    this._orderDate = new Date(value);
+  }
+  get orderDate(): Date {
+    return this._orderDate;
+  }
 
   lines: OrderDataLookup[] = [];
   areas: OrderDataLookup[] = [];
