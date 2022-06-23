@@ -9,6 +9,7 @@ import { WorkOrdersUpdateRequestModel } from '../models/work-orders-update-reque
 import { WorkOrderModel } from '../models/work-order-model';
 import { WorkOrderFileDataModel } from '../models/work-order-file-data-model';
 import { AuditTrailModel } from '../models/audit-trail-model';
+import { WorkOrderAttachmentModel } from '../models/work-order-attachment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,11 @@ export class WorkOrdersDataService {
     );
   }
 
-  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel): Observable<WorkOrderModel> {    
+  saveWorkOrder(workorderModel: WorkOrdersCreateRequestModel): Observable<WorkOrderModel> {
     return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/create', workorderModel);
   }
 
-  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel): Observable<WorkOrderModel> {    
+  editWorkOrder(workorderModel: WorkOrdersUpdateRequestModel): Observable<WorkOrderModel> {
     return this.httpClient.post<WorkOrderModel>('/api/v1/user/workorder/update', workorderModel);
   }
 
@@ -49,8 +50,16 @@ export class WorkOrdersDataService {
     return this.httpClient.delete(`/api/v1/user/workorder/delete?orderUuid=${orderUuid}`);
   }
 
-  uploadFiles(orderUuid: String, files: FormData) {
-    return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, files).pipe(
+  uploadFiles(orderUuid: String, selectedFiles: WorkOrderAttachmentModel[]) {
+    const formData = new FormData();
+    selectedFiles
+      .filter(p => p.uploadResult !== "success")
+      .forEach(p => {
+        formData.append('files', p.file);
+        p.isUploadInProgress = true;
+        p.uploadResult = "";
+      });
+    return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, formData).pipe(
       tap(() => this.filesUploadedSubject.next(orderUuid))
     );
   }

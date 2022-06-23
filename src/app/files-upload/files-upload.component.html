@@ -37,9 +37,7 @@
         </mat-expansion-panel>
     </div>
     <div class="file-upload__options">
-        <form class="file-upload__native-selection" [formGroup]="fileSelectionForm">
-            <input type="file" #fileSelector formControlName="file_selection" multiple="true">
-        </form>
+        <input type="file" #fileSelector formControlName="file_selection" multiple="true" style="display: none;">
         <button matRipple class="file-upload__browse primary-button" (click)="openFileSelector()">
             Browse Files
         </button>

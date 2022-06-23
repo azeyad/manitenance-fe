@@ -1,7 +1,7 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter, fromEvent, map } from 'rxjs';
 import { WorkOrderAttachmentModel } from '../models/work-order-attachment.model';
 import { WorkOrdersDataService } from '../services/work-orders-data.service';
 
@@ -10,45 +10,41 @@ import { WorkOrdersDataService } from '../services/work-orders-data.service';
   templateUrl: './files-upload.component.html',
   styleUrls: ['./files-upload.component.scss']
 })
-export class FilesUploadComponent implements OnInit {
+export class FilesUploadComponent implements OnInit, AfterViewInit {
 
   workOrderUuid: String;
   selectedFiles: WorkOrderAttachmentModel[] = [];
 
   @ViewChild("fileSelector", { static: false }) fileSelectorInput!: ElementRef<HTMLInputElement>;
 
-  fileSelectionForm: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private snackBar: MatSnackBar, private ordersDataService: WorkOrdersDataService, private dialogRef: MatDialogRef<FilesUploadComponent>) {
     this.workOrderUuid = data.orderUuid;
-    this.fileSelectionForm = new FormGroup({
-      file_selection: new FormControl()
+  }
+
+  ngAfterViewInit(): void {
+    fromEvent(this.fileSelectorInput.nativeElement, 'input').pipe(
+      filter(() => this.fileSelectorInput.nativeElement.files != null && this.fileSelectorInput.nativeElement.files.length > 0),
+      map(() => this.FilesListToWorkOrderAttachmentModels())
+    ).subscribe({
+      next: (selectedFiles: WorkOrderAttachmentModel[]) => {
+        this.selectedFiles = [...this.selectedFiles, ...selectedFiles];
+        this.fileSelectorInput.nativeElement.value = '';
+      }
     });
   }
 
   ngOnInit(): void {
-    this.trackFileSelection();
   }
 
   openFileSelector() {
-    const fileSelectionElement = this.fileSelectorInput.nativeElement;
-    fileSelectionElement.click();
+    this.fileSelectorInput.nativeElement.click();
   }
 
-  trackFileSelection() {
-    this.fileSelectionForm.get('file_selection')?.valueChanges
-      .subscribe({
-        next: () => {
-          const fileSelectionInput: HTMLInputElement = this.fileSelectorInput.nativeElement;
-          this.selectFiles(fileSelectionInput.files);
-          this.fileSelectorInput.nativeElement.value = '';
-        }
-      });
-  }
-
-  selectFiles(filesList: any) {
+  FilesListToWorkOrderAttachmentModels(): WorkOrderAttachmentModel[] {
+    const filesList: any = this.fileSelectorInput.nativeElement.files;
     const filesArray = [...filesList];
-    const validFiles: WorkOrderAttachmentModel[] = filesArray
+    const selectedFiles: WorkOrderAttachmentModel[] = filesArray
       .map((file: any) => {
         const attachmentModel: WorkOrderAttachmentModel = {
           file: file,
@@ -57,27 +53,7 @@ export class FilesUploadComponent implements OnInit {
         };
         return attachmentModel;
       });
-    this.selectedFiles = [...this.selectedFiles, ...validFiles];
-  }
-
-  uploadFile(index: number) {
-    if (this.selectedFiles[index].uploadResult === "success") return;
-    const formData = new FormData();
-    formData.append('files', this.selectedFiles[index].file);
-    this.selectedFiles[index].isUploadInProgress = true;
-    this.selectedFiles[index].uploadResult = "";
-    this.ordersDataService.uploadFiles(this.workOrderUuid, formData)
-      .subscribe({
-        next: () => {
-          this.selectedFiles[index].isUploadInProgress = false;
-          this.selectedFiles[index].uploadResult = "success";
-          this.showSuccessUploadSnackBar();
-        },
-        error: () => {
-          this.selectedFiles[index].isUploadInProgress = false;
-          this.selectedFiles[index].uploadResult = "Upload failed.";
-        }
-      });
+    return selectedFiles;
   }
 
   private showSuccessUploadSnackBar() {
@@ -87,15 +63,7 @@ export class FilesUploadComponent implements OnInit {
   }
 
   uploadAll() {
-    const formData = new FormData();
-    this.selectedFiles
-      .filter(p => p.uploadResult !== "success")
-      .forEach(p => {
-        formData.append('files', p.file);
-        p.isUploadInProgress = true;
-        p.uploadResult = "";
-      });
-    this.ordersDataService.uploadFiles(this.workOrderUuid, formData)
+    this.ordersDataService.uploadFiles(this.workOrderUuid, this.selectedFiles)
       .subscribe({
         next: () => {
           this.selectedFiles.forEach(p => {
