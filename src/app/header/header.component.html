@@ -12,19 +12,22 @@
 
             <mat-menu #accountMenu="matMenu">
                 <button mat-menu-item routerLink="/search">
-                  <mat-icon>home</mat-icon>
-                  <span>Home</span>
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </button>
+                <button mat-menu-item (click)="openFileSelector()">
+                    <mat-icon>backup</mat-icon>
+                    <span>Import</span>
                 </button>
                 <button mat-menu-item>
-                  <mat-icon>backup</mat-icon>
-                  <span>Import</span>
+                    <mat-icon>logout</mat-icon>
+                    <span>Sign out</span>
                 </button>
-                <button mat-menu-item>
-                  <mat-icon>logout</mat-icon>
-                  <span>Sign out</span>
-                </button>
-              </mat-menu>
+            </mat-menu>
         </div>
+    </div>
+    <div style="display:none;">
+        <input type="file" #fileSelector multiple="false" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
     </div>
     <div class="primary-navigation row justify-content-center">
         <nav mat-tab-nav-bar role="tablist" aria-labelledby="primary-navigation">
