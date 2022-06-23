@@ -54,11 +54,7 @@ export class WorkOrdersDataService {
     const formData = new FormData();
     selectedFiles
       .filter(p => p.uploadResult !== "success")
-      .forEach(p => {
-        formData.append('files', p.file);
-        p.isUploadInProgress = true;
-        p.uploadResult = "";
-      });
+      .forEach(p => formData.append('files', p.file));
     return this.httpClient.post(`/api/v1/user/workorder/attach?orderUuid=${orderUuid}`, formData).pipe(
       tap(() => this.filesUploadedSubject.next(orderUuid))
     );

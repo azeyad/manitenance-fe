@@ -63,6 +63,7 @@ export class FilesUploadComponent implements OnInit, AfterViewInit {
   }
 
   uploadAll() {
+    this.markSelectedFilesAsInProgress();
     this.ordersDataService.uploadFiles(this.workOrderUuid, this.selectedFiles)
       .subscribe({
         next: () => {
@@ -79,6 +80,13 @@ export class FilesUploadComponent implements OnInit, AfterViewInit {
           });
         }
       });
+  }
+
+  private markSelectedFilesAsInProgress() {
+    this.selectedFiles.forEach(p => {
+      p.isUploadInProgress = true;
+      p.uploadResult = "";
+    });
   }
 
   isAnyFileNotUploaded(): boolean {
