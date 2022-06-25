@@ -1,7 +1,10 @@
-<div class="secure-container container-fluid">
+<div *ngIf="authService.isAuthenticated()" class="secure-container container-fluid">
     <app-header></app-header>
     <div class="secure-container__content row justify-content-center">
         <router-outlet></router-outlet>
     </div>
-    <app-footer></app-footer>
+</div>
+
+<div *ngIf="!authService.isAuthenticated()">
+    <router-outlet></router-outlet>
 </div>

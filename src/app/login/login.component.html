@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="container-fluid">
+    <div class="row page-content login-page">
+        <div class="column login-page__banner justify-content-center">
+            <div class="col-10 d-flex flex-column justify-content-center align-items-center">
+                <h1>Maintenance Manager</h1>
+                <img class="brand-logo" src="../../assets/images/login_logo.png" alt="Modhyobitto Logo">
+            </div>
+        </div>
+        <div class="column login-form-container">
+            <main role="main">
+                <form #loginForm="ngForm">
+                    <div class="custom-mat-form-field">
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <input matInput name="username" label="Username" placeholder="Enter Username"
+                                    maxlength="15" required [(ngModel)]="userName" />
+                                <mat-error>Username can not be left blank.</mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <input matInput name="password" type="password" label="Password"
+                                    placeholder="Enter Password" maxlength="15" required [(ngModel)]="password" />
+                                <mat-error>Password can not be left blank.</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="column" fxLayoutAlign="flex-end">
+                                <button matRipple class="primary-button" [disabled]="!loginForm.valid"
+                                    (click)="login()">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
